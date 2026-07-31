@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carte des programmes — Groupe Giboire</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/colors.css">
+<link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/typography.css">
+<script src="giboire-data.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  #map { width: 100%; height: 100vh; background: var(--surface-sunken); }
+  .leaflet-container { font-family: var(--font-body); }
+  .gib-pin {
+    background: var(--blue-700);
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(15,33,63,.4);
+    width: 42px; height: 42px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .gib-pin .n { font-family: var(--font-display); font-weight: 800; font-size: 15px; }
+  .gib-pin .lbl { font-size: 7.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .leaflet-popup-content-wrapper { border-radius: 12px; }
+  .leaflet-popup-content { margin: 15px 17px; }
+  .gib-pop-city { font-family: var(--font-body); font-weight: 700; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
+  .gib-pop-name { font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--blue-950); margin-bottom: 8px; letter-spacing: -.01em; }
+  .gib-pop-meta { font-size: 12.5px; color: var(--text-body); line-height: 1.55; margin-bottom: 12px; }
+  .gib-pop-meta b { color: var(--blue-800); }
+  .gib-pop-btn {
+    display: inline-block; width: 100%; box-sizing: border-box; text-align: center;
+    background: var(--coral-500); color: #fff; border: none; cursor: pointer;
+    font-family: var(--font-body); font-weight: 700; font-size: 13px;
+    padding: 10px 12px; border-radius: 10px;
+  }
+  .gib-pop-btn:hover { background: var(--coral-600); }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  const { PROGRAMS, LOTS, euro } = window.GIBOIRE;
+  const PHOTOS = {
+    thabor: "balcon-ville.png", georges: "salon-ville.png", chalands: "capmail.jpg",
+    rance: "roches-nuit.jpg", kerlann: "vannes-renaissance.jpg", helios: "terrasse-famille.png",
+    iris: "int-fleurs.png", prisme: "cuisine-famille.png", belleville: "ambilly-terrasse.jpg"
+  };
+  const map = L.map("map", { scrollWheelZoom: true }).setView([47.6, -1.4], 7);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors", maxZoom: 19
+  }).addTo(map);
+
+  const bounds = [];
+  const markersByProg = {};
+  PROGRAMS.forEach(function (p) {
+    const lots = LOTS.filter(function (l) { return l.prog === p.id && l.featured && l.status !== "vendu"; });
+    if (!lots.length) return;
+    const from = Math.min.apply(null, lots.map(function (l) { return l.price; }));
+    const icon = L.divIcon({
+      className: "",
+      html: '<div class="gib-pin"><span class="n">' + lots.length + '</span><span class="lbl">biens</span></div>',
+      iconSize: [42, 42], iconAnchor: [21, 21], popupAnchor: [0, -23]
+    });
+    const m = L.marker([p.lat, p.lng], { icon: icon }).addTo(map);
+    markersByProg[p.id] = m;
+    bounds.push([p.lat, p.lng]);
+    m.bindPopup(
+      (PHOTOS[p.id] ? '<div style="height:96px;margin:-15px -17px 11px;background:#17315d url(\'assets/photos/' + PHOTOS[p.id] + '\') center/cover no-repeat;border-radius:12px 12px 0 0"></div>' : '') +
+      '<div class="gib-pop-city">' + p.city + " · " + p.dept + '</div>' +
+      '<div class="gib-pop-name">' + p.name + '</div>' +
+      '<div class="gib-pop-meta"><b>' + lots.length + '</b> bien' + (lots.length > 1 ? "s" : "") + ' en promotion<br>' +
+      'À partir de <b>' + euro(from) + '</b><br>Livraison ' + p.delivery + '</div>' +
+      '<button class="gib-pop-btn" onclick="openProg(\'' + p.id + '\')">Voir les biens</button>'
+    );
+  });
+  if (bounds.length) map.fitBounds(bounds, { padding: [60, 60] });
+
+  window.openProg = function (id) {
+    parent.postMessage({ type: "giboire-map-open", prog: id }, "*");
+  };
+
+  window.addEventListener("message", function (e) {
+    if (!e.data) return;
+    if (e.data.type === "giboire-hl") {
+      const m = markersByProg[e.data.prog];
+      if (m) { m.openPopup(); if (m._icon) { m._icon.style.transition = "transform .15s ease"; m._icon.style.transform += " scale(1.18)"; m._icon.style.zIndex = 1000; } }
+    }
+    if (e.data.type === "giboire-unhl") {
+      map.closePopup();
+      Object.keys(markersByProg).forEach(function (k) {
+        const ic = markersByProg[k]._icon;
+        if (ic) { ic.style.transform = ic.style.transform.replace(" scale(1.18)", ""); ic.style.zIndex = ""; }
+      });
+    }
+  });
+</script>
+</body>
+</html>

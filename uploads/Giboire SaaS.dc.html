@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/base.css">
+  <link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/styles.css">
+  <script src="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/_ds_bundle.js"></script>
+  <script src="giboire-data.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--color-bg);color:var(--color-text-body);font-family:var(--font-body)}
+    a{color:var(--color-link);text-decoration:none}
+    a:hover{color:var(--color-link-hover);text-decoration:underline;text-underline-offset:.15em}
+    ::selection{background:var(--gib-sand)}
+    input,select,textarea,button{font-family:inherit}
+  </style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg)">
+
+  <div style="height:46px;background:var(--gib-blue-900);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;position:sticky;top:0;z-index:50">
+    <span style="font-family:var(--font-heading);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.72)">Groupe Giboire · Mini-SaaS · Prototype interne</span>
+    <div style="display:inline-flex;gap:2px;padding:3px;background:rgba(255,255,255,.12);border-radius:6px">
+      <sc-for list="{{ modeTabs }}" as="tab" hint-placeholder-count="2">
+        <button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ isFront }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;display:flex;flex-direction:column">
+    <header style="background:var(--color-surface);border-bottom:1px solid var(--color-border);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div style="display:flex;align-items:center;gap:16px;cursor:pointer" onClick="{{ goList }}">
+        <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Logo" src="assets/giboire-logo-liseret.png" size="42" hint-size="42px,42px"></x-import>
+        <div style="border-left:1px solid var(--color-divider);padding-left:16px">
+          <div class="gib-overline">Programmes neufs</div>
+          <div style="font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--color-text)">Nos biens en promotion</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <span style="font-size:13px;color:var(--color-text-muted)">Un conseiller vous accompagne</span>
+        <span style="font-family:var(--font-heading);font-weight:700;font-size:16px;color:var(--color-primary)">02 99 00 00 00</span>
+      </div>
+    </header>
+
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:1">
+      <section style="max-width:1280px;margin:0 auto;width:100%;padding:52px 40px 34px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center">
+        <div>
+          <div class="gib-overline" style="color:var(--color-accent)">Grand Ouest · Édition 2026</div>
+          <h1 class="gib-display" style="font-size:52px;margin:14px 0 0;max-width:13ch;line-height:1.04">Les derniers biens <em>à saisir</em></h1>
+          <p style="font-size:16px;line-height:1.65;color:var(--color-text-body);max-width:47ch;margin:18px 0 0">Une sélection d'appartements neufs encore disponibles dans nos résidences. Affinez votre recherche par ville et typologie — un conseiller vous accompagne à chaque étape.</p>
+          <div style="margin-top:30px;background:var(--color-surface);border:1.5px solid var(--color-border-strong);border-radius:6px;padding:7px;display:flex;align-items:stretch;box-shadow:var(--shadow-sm)">
+            <div style="flex:2;min-width:150px;display:flex;align-items:center;padding:0 14px">
+              <input value="{{ q }}" onInput="{{ setQ }}" placeholder="Résidence, ville, mot-clé…" style="width:100%;border:none;outline:none;background:transparent;font-size:14.5px;color:var(--color-text);padding:11px 0">
+            </div>
+            <div style="width:1px;background:var(--color-divider);margin:6px 0"></div>
+            <div style="flex:1;min-width:112px;display:flex;align-items:center">
+              <select value="{{ filterType }}" onChange="{{ setType }}" style="width:100%;border:none;outline:none;background:transparent;font-size:14.5px;color:var(--color-text);padding:11px 14px;cursor:pointer;appearance:none">
+                <option value="">Type de bien</option>
+                <option value="T1">T1</option>
+                <option value="T2">T2</option>
+                <option value="T3">T3</option>
+                <option value="T4">T4</option>
+              </select>
+            </div>
+            <div style="width:1px;background:var(--color-divider);margin:6px 0"></div>
+            <div style="flex:1;min-width:112px;display:flex;align-items:center">
+              <select value="{{ filterCity }}" onChange="{{ setCity }}" style="width:100%;border:none;outline:none;background:transparent;font-size:14.5px;color:var(--color-text);padding:11px 14px;cursor:pointer;appearance:none">
+                <option value="">Toutes les villes</option>
+                <option value="Rennes">Rennes</option>
+                <option value="Nantes">Nantes</option>
+                <option value="Saint-Malo">Saint-Malo</option>
+                <option value="Vannes">Vannes</option>
+                <option value="La Baule">La Baule</option>
+                <option value="Angers">Angers</option>
+                <option value="Bordeaux">Bordeaux</option>
+                <option value="Paris 19e">Paris 19e</option>
+              </select>
+            </div>
+            <button onClick="{{ runSearch }}" style="flex-shrink:0;background:var(--color-accent);color:#fff;border:none;border-radius:4px;padding:0 24px;font-family:var(--font-heading);font-weight:600;font-size:14.5px;letter-spacing:.01em;cursor:pointer;transition:background .16s ease" style-hover="background:#a45c3f">Rechercher</button>
+          </div>
+        </div>
+        <div style="position:relative">
+          <div style="position:relative;border-radius:6px;overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:4/3">
+            <image-slot id="gib-hero" shape="rect" placeholder="Visuel d'architecture — déposez une photo"></image-slot>
+          </div>
+          <div style="position:absolute;inset:12px;border:1px solid rgba(255,255,255,.4);border-radius:2px;pointer-events:none"></div>
+        </div>
+      </section>
+
+      <section id="gib-results" style="max-width:1280px;margin:0 auto;width:100%;padding:26px 40px 12px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <span style="font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--color-text)">{{ frontCount }} biens disponibles</span>
+            <sc-if value="{{ hasProgFilter }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ clearProg }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--gib-ivory);border:1px solid var(--color-border-strong);border-radius:4px;padding:5px 10px;font-size:12.5px;color:var(--color-text);cursor:pointer">{{ progFilterLabel }} <span style="color:var(--color-text-muted);font-size:14px">×</span></button>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+              <div style="min-width:186px">
+                <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Select" size="sm" value="{{ sort }}" onChange="{{ setSort }}" hint-size="186px,36px">
+                  <option value="featured">Tri : mis en avant</option>
+                  <option value="price-asc">Prix croissant</option>
+                  <option value="price-desc">Prix décroissant</option>
+                  <option value="surface-desc">Surface décroissante</option>
+                </x-import>
+              </div>
+            </sc-if>
+            <div style="display:inline-flex;gap:2px;padding:3px;background:var(--gib-ivory);border-radius:6px;border:1px solid var(--color-border)">
+              <sc-for list="{{ viewTabs }}" as="tab" hint-placeholder-count="2"><button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button></sc-for>
+            </div>
+            <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+              <div style="display:inline-flex;gap:2px;padding:3px;background:var(--gib-ivory);border-radius:6px;border:1px solid var(--color-border)">
+                <sc-for list="{{ variantTabs }}" as="tab" hint-placeholder-count="3"><button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button></sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <sc-if value="{{ isEditorial }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;padding-top:4px">
+          <sc-for list="{{ frontLots }}" as="lot" hint-placeholder-count="6">
+            <div onClick="{{ lot.open }}" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .18s ease" style-hover="box-shadow:var(--shadow-md);transform:translateY(-2px)">
+              <div style="position:relative;height:186px;background:{{ lot.cover }};display:flex;flex-direction:column;justify-content:flex-end;padding:16px">
+                <div style="position:absolute;inset:10px;border:1px solid rgba(255,255,255,.35)"></div>
+                <sc-if value="{{ lot.showRibbon }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:14px;left:14px;background:var(--color-accent);color:#fff;font-family:var(--font-heading);font-weight:600;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:3px">{{ lot.promoNote }}</span></sc-if>
+                <span style="position:absolute;top:14px;right:14px;background:{{ lot.statusBg }};color:{{ lot.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:3px">{{ lot.statusLabel }}</span>
+                <div style="position:relative;color:rgba(255,255,255,.75);font-family:var(--font-heading);font-size:10px;letter-spacing:.14em;text-transform:uppercase">{{ lot.city }} · {{ lot.dept }}</div>
+                <div style="position:relative;color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:21px;line-height:1.1">{{ lot.progName }}</div>
+              </div>
+              <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;flex:1">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                  <span style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:var(--color-text)">{{ lot.typeSurface }}</span>
+                  <span style="font-family:var(--font-display);font-weight:300;font-size:22px;color:var(--color-primary)">{{ lot.priceLabel }}</span>
+                </div>
+                <div style="font-size:13px;color:var(--color-text-muted);line-height:1.5">{{ lot.floorLabel }} · {{ lot.orient }} · {{ lot.balconyLabel }}</div>
+                <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--color-divider);display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:12.5px;color:var(--color-text-muted)">Dispo. {{ lot.availLabel }}</span>
+                  <span style="font-family:var(--font-heading);font-weight:600;font-size:13px;color:var(--color-primary)">Voir le bien →</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isCompact }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:14px;padding-top:4px">
+          <sc-for list="{{ frontLots }}" as="lot" hint-placeholder-count="6">
+            <div onClick="{{ lot.open }}" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:6px;overflow:hidden;cursor:pointer;display:flex;transition:box-shadow .18s ease" style-hover="box-shadow:var(--shadow-md)">
+              <div style="position:relative;width:150px;flex-shrink:0;background:{{ lot.cover }};display:flex;flex-direction:column;justify-content:flex-end;padding:12px">
+                <div style="position:absolute;inset:8px;border:1px solid rgba(255,255,255,.3)"></div>
+                <div style="position:relative;color:rgba(255,255,255,.85);font-family:var(--font-display);font-style:italic;font-weight:300;font-size:15px;line-height:1.15">{{ lot.city }}</div>
+              </div>
+              <div style="padding:14px 16px;display:flex;flex-direction:column;gap:7px;flex:1">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                  <span style="font-family:var(--font-heading);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-muted)">{{ lot.progName }}</span>
+                  <span style="background:{{ lot.statusBg }};color:{{ lot.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:3px">{{ lot.statusLabel }}</span>
+                </div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">
+                  <span style="font-family:var(--font-heading);font-weight:700;font-size:17px;color:var(--color-text)">{{ lot.typeSurface }}</span>
+                  <span style="font-family:var(--font-display);font-weight:300;font-size:20px;color:var(--color-primary)">{{ lot.priceLabel }}</span>
+                </div>
+                <div style="font-size:12.5px;color:var(--color-text-muted)">{{ lot.floorLabel }} · {{ lot.orient }} · {{ lot.balconyLabel }}</div>
+                <div style="margin-top:auto;padding-top:8px;font-family:var(--font-heading);font-weight:600;font-size:12.5px;color:var(--color-primary)">Voir le bien →</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isSignature }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px;padding-top:6px">
+          <sc-for list="{{ frontLots }}" as="lot" hint-placeholder-count="6">
+            <div onClick="{{ lot.open }}" style="background:var(--color-surface);border:1px solid var(--color-border);box-shadow:var(--shadow-sm);cursor:pointer;padding:12px 12px 18px;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .18s ease" style-hover="box-shadow:var(--shadow-md);transform:translateY(-3px)">
+              <div style="position:relative;aspect-ratio:1/1;background:{{ lot.cover }};border-bottom:9px solid var(--color-accent);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px">
+                <span style="background:{{ lot.statusBg }};color:{{ lot.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;border-radius:3px;position:absolute;top:12px;right:12px">{{ lot.statusLabel }}</span>
+                <div style="color:rgba(255,255,255,.75);font-family:var(--font-heading);font-size:10px;letter-spacing:.16em;text-transform:uppercase">{{ lot.city }}</div>
+                <div style="color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:24px;line-height:1.12;margin-top:6px">{{ lot.progName }}</div>
+              </div>
+              <div style="padding:16px 6px 0;display:flex;flex-direction:column;gap:8px">
+                <div style="font-family:var(--font-heading);font-weight:700;font-size:17px;color:var(--color-text)">{{ lot.typeSurface }}</div>
+                <div style="font-size:12.5px;color:var(--color-text-muted)">{{ lot.floorLabel }} · {{ lot.orient }} · {{ lot.balconyLabel }}</div>
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:4px">
+                  <span style="font-family:var(--font-display);font-weight:300;font-size:24px;color:var(--color-accent)">{{ lot.priceLabel }}</span>
+                  <span style="font-family:var(--font-heading);font-weight:600;font-size:12.5px;color:var(--color-primary)">Détail →</span>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid var(--color-border-strong);border-radius:6px;overflow:hidden;background:var(--gib-ivory)">
+          <iframe src="carte-programmes.html" title="Carte des programmes" style="width:100%;height:620px;border:0;display:block"></iframe>
+        </div>
+        <p style="font-size:12.5px;color:var(--color-text-muted);margin:10px 2px 0">Cliquez un repère pour voir les biens en promotion du programme.</p>
+        </sc-if>
+
+        <sc-if value="{{ frontEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:56px 20px;color:var(--color-text-muted)">Aucun bien ne correspond à votre recherche. <button onClick="{{ resetFilters }}" style="background:none;border:none;color:var(--color-link);cursor:pointer;font-size:inherit;text-decoration:underline">Réinitialiser les filtres</button></div>
+        </sc-if>
+        <div style="height:48px"></div>
+      </section>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1180px;margin:0 auto;width:100%;padding:24px 40px 60px">
+      <button onClick="{{ goList }}" style="background:none;border:none;color:var(--color-text-muted);cursor:pointer;font-size:13px;padding:6px 0;display:inline-flex;align-items:center;gap:6px">← Retour à la liste</button>
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:40px;margin-top:12px;align-items:start">
+        <div>
+          <div style="position:relative;height:340px;background:{{ current.cover }};border-radius:6px;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;overflow:hidden">
+            <div style="position:absolute;inset:14px;border:1px solid rgba(255,255,255,.35)"></div>
+            <span style="position:absolute;top:20px;right:20px;background:{{ current.statusBg }};color:{{ current.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:6px 11px;border-radius:3px">{{ current.statusLabel }}</span>
+            <div style="position:relative;color:rgba(255,255,255,.8);font-family:var(--font-heading);font-size:11px;letter-spacing:.16em;text-transform:uppercase">{{ current.city }} · {{ current.dept }}</div>
+            <div style="position:relative;color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:34px;line-height:1.08;margin-top:6px">{{ current.progName }}</div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <div style="flex:1;height:64px;background:var(--gib-sand);border-radius:4px"></div>
+            <div style="flex:1;height:64px;background:var(--gib-ivory);border-radius:4px"></div>
+            <div style="flex:1;height:64px;background:var(--gib-sand);border-radius:4px"></div>
+            <div style="flex:1;height:64px;background:var(--gib-ivory);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--color-text-muted)">+6 photos</div>
+          </div>
+
+          <div style="margin-top:30px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+              <h2 style="font-family:var(--font-heading);font-weight:700;font-size:26px;color:var(--color-text);margin:0">{{ current.typeSurface }} — {{ current.lotRef }}</h2>
+              <span style="font-family:var(--font-display);font-weight:300;font-size:32px;color:var(--color-primary)">{{ current.priceLabel }}</span>
+            </div>
+            <p style="font-size:15px;line-height:1.65;color:var(--color-text-body);margin:16px 0 0;max-width:60ch">{{ current.description }}</p>
+          </div>
+
+          <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--color-divider);border:1px solid var(--color-divider);border-radius:6px;overflow:hidden">
+            <sc-for list="{{ current.facts }}" as="f" hint-placeholder-count="6">
+              <div style="background:var(--color-surface);padding:16px 18px">
+                <div class="gib-overline">{{ f.k }}</div>
+                <div style="font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--color-text);margin-top:5px">{{ f.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:28px;padding:20px 22px;background:var(--gib-offwhite);border:1px solid var(--color-border);border-radius:6px;display:flex;gap:18px;align-items:flex-start">
+            <div style="width:6px;align-self:stretch;background:var(--color-accent);border-radius:3px;flex-shrink:0"></div>
+            <div>
+              <div class="gib-overline">Le programme</div>
+              <div style="font-family:var(--font-heading);font-weight:600;font-size:16px;color:var(--color-text);margin-top:4px">{{ current.progName }}</div>
+              <div style="font-size:13.5px;color:var(--color-text-body);line-height:1.6;margin-top:6px">Livraison prévue : {{ current.delivery }} · Architecte : {{ current.arch }}<br>Nous vous accompagnons de la réservation à la remise des clés.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="position:sticky;top:70px">
+          <div style="background:var(--color-surface);border:1.5px solid var(--color-border-strong);border-radius:6px;padding:24px">
+            <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:14px 4px">
+                <div style="width:52px;height:52px;background:var(--color-success-bg);color:var(--color-success);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px">✓</div>
+                <div style="font-family:var(--font-heading);font-weight:700;font-size:18px;color:var(--color-text)">Demande envoyée</div>
+                <p style="font-size:14px;color:var(--color-text-body);line-height:1.6;margin:10px 0 18px">Merci {{ form.first }}. Votre conseiller vous recontacte sous 24 h ouvrées au sujet du {{ current.typeSurface }} — {{ current.progName }}.</p>
+                <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Button" variant="secondary" onClick="{{ resetForm }}" hint-size="100%,42px" style="width:100%">Nouvelle demande</x-import>
+              </div>
+            </sc-if>
+            <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <div class="gib-overline" style="color:var(--color-accent)">Renseignements</div>
+                <h3 style="font-family:var(--font-heading);font-weight:700;font-size:20px;color:var(--color-text);margin:6px 0 4px">Être recontacté</h3>
+                <p style="font-size:13px;color:var(--color-text-muted);line-height:1.5;margin:0 0 18px">Un conseiller vous répond sous 24 h. Nous ne partageons jamais vos coordonnées.</p>
+                <div style="background:var(--gib-ivory);border-radius:4px;padding:10px 12px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+                  <div style="width:34px;height:34px;background:{{ current.cover }};border-radius:3px;flex-shrink:0"></div>
+                  <div style="line-height:1.35">
+                    <div style="font-family:var(--font-heading);font-weight:600;font-size:13px;color:var(--color-text)">{{ current.typeSurface }} · {{ current.lotRef }}</div>
+                    <div style="font-size:12px;color:var(--color-text-muted)">{{ current.progName }} — {{ current.city }}</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:13px">
+                  <div style="display:flex;gap:10px">
+                    <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Field" label="Prénom" required="{{ true }}" hint-size="100%,68px">
+                      <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Input" value="{{ form.first }}" onChange="{{ setFirst }}" placeholder="Prénom" hint-size="100%,42px"></x-import>
+                    </x-import>
+                    <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Field" label="Nom" required="{{ true }}" hint-size="100%,68px">
+                      <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Input" value="{{ form.last }}" onChange="{{ setLast }}" placeholder="Nom" hint-size="100%,42px"></x-import>
+                    </x-import>
+                  </div>
+                  <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Field" label="Email" required="{{ true }}" hint-size="100%,68px">
+                    <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Input" type="email" value="{{ form.email }}" onChange="{{ setEmail }}" placeholder="vous@exemple.fr" hint-size="100%,42px"></x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Field" label="Téléphone" required="{{ true }}" hint-size="100%,68px">
+                    <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Input" value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="06 00 00 00 00" hint-size="100%,42px"></x-import>
+                  </x-import>
+                  <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Field" label="Votre message" hint="Facultatif" hint-size="100%,110px">
+                    <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Textarea" value="{{ form.message }}" onChange="{{ setMessage }}" rows="3" placeholder="Une question, un créneau de visite souhaité…" hint-size="100%,80px"></x-import>
+                  </x-import>
+                  <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:12.5px;color:var(--color-text-body);line-height:1.5">
+                    <input type="checkbox" checked="{{ form.rgpd }}" onChange="{{ toggleRgpd }}" style="width:17px;height:17px;margin-top:1px;accent-color:var(--color-primary);flex-shrink:0">
+                    <span>J'accepte que Groupe Giboire utilise mes données pour me recontacter au sujet de ce bien.</span>
+                  </label>
+                  <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Button" onClick="{{ submitForm }}" disabled="{{ cannotSubmit }}" hint-size="100%,46px" style="width:100%">Envoyer ma demande</x-import>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:14px;padding:0 4px;color:var(--color-text-muted);font-size:12.5px">
+            <span style="font-family:var(--font-heading);font-weight:700;color:var(--color-primary);font-size:15px">02 99 00 00 00</span> · Du lundi au samedi
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;display:flex;min-height:0">
+    <aside style="width:236px;flex-shrink:0;background:var(--gib-blue-900);color:#fff;display:flex;flex-direction:column;padding:22px 14px">
+      <div style="padding:0 8px 22px">
+        <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Logo" src="assets/giboire-logo-liseret.png" size="46" hint-size="46px,46px"></x-import>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:12px">Back office</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <sc-for list="{{ adminNav }}" as="n" hint-placeholder-count="2">
+          <button onClick="{{ n.onClick }}" style="{{ n.style }}">
+            <span>{{ n.label }}</span>
+            <sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span style="background:var(--color-accent);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center">{{ n.badgeCount }}</span></sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;padding:14px 10px 0;border-top:1px solid rgba(255,255,255,.14)">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)">Source de données</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--gib-olive-light)"></span>
+          <span style="font-family:var(--font-heading);font-weight:600;font-size:13.5px">UnLatch</span>
+        </div>
+        <div style="font-size:11.5px;color:rgba(255,255,255,.55);margin-top:4px">Sync. {{ lastSync }}</div>
+      </div>
+    </aside>
+
+    <main style="flex:1;overflow:auto;background:var(--color-bg)">
+      <sc-if value="{{ isBiens }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:30px 34px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div>
+            <div class="gib-overline">UnLatch · Gestion commerciale</div>
+            <h1 style="font-family:var(--font-heading);font-weight:700;font-size:28px;color:var(--color-text);margin:6px 0 0">Biens en vente</h1>
+            <p style="font-size:14px;color:var(--color-text-muted);margin:6px 0 0">Lots synchronisés depuis UnLatch. Activez « Mis en avant » pour publier un bien sur le site public.</p>
+          </div>
+          <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Button" variant="secondary" onClick="{{ startSync }}" disabled="{{ syncing }}" hint-size="auto,42px">{{ syncLabel }}</x-import>
+        </div>
+
+        <div style="display:flex;gap:14px;margin:22px 0 18px;flex-wrap:wrap">
+          <sc-for list="{{ biensStats }}" as="s" hint-placeholder-count="4">
+            <div style="flex:1;min-width:150px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:6px;padding:16px 18px">
+              <div style="font-family:var(--font-display);font-weight:300;font-size:30px;color:{{ s.color }};line-height:1">{{ s.value }}</div>
+              <div class="gib-overline" style="margin-top:8px">{{ s.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+          <div style="flex:2;min-width:220px"><x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Input" value="{{ adminQ }}" onChange="{{ setAdminQ }}" placeholder="Rechercher un lot, une résidence…" hint-size="100%,42px"></x-import></div>
+          <div style="flex:1;min-width:180px"><x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Select" value="{{ adminProg }}" onChange="{{ setAdminProg }}" hint-size="100%,42px">
+            <option value="">Tous les programmes</option>
+            <sc-for list="{{ progOptions }}" as="o" hint-placeholder-count="9"><option value="{{ o.id }}">{{ o.name }}</option></sc-for>
+          </x-import></div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:6px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:2.2fr 1fr 1.4fr 1.2fr 1.1fr 1fr 1.1fr;gap:10px;padding:12px 18px;background:var(--gib-offwhite);border-bottom:1px solid var(--color-border);font-family:var(--font-heading);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-muted)">
+            <span>Lot / Résidence</span><span>Type</span><span>Étage / orient.</span><span>Prix</span><span>Statut</span><span>Dispo.</span><span style="text-align:right">Mis en avant</span>
+          </div>
+          <sc-for list="{{ adminLots }}" as="l" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:2.2fr 1fr 1.4fr 1.2fr 1.1fr 1fr 1.1fr;gap:10px;padding:14px 18px;border-bottom:1px solid var(--color-divider);align-items:center">
+              <div style="display:flex;align-items:center;gap:12px">
+                <div style="width:34px;height:34px;background:{{ l.cover }};border-radius:3px;flex-shrink:0"></div>
+                <div style="line-height:1.35;min-width:0">
+                  <div style="font-family:var(--font-heading);font-weight:600;font-size:13.5px;color:var(--color-text)">{{ l.lotRef }}</div>
+                  <div style="font-size:12px;color:var(--color-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.progName }} · {{ l.city }}</div>
+                </div>
+              </div>
+              <span style="font-family:var(--font-heading);font-weight:600;font-size:13.5px;color:var(--color-text)">{{ l.typeSurface }}</span>
+              <span style="font-size:12.5px;color:var(--color-text-body)">{{ l.floorLabel }} · {{ l.orient }}</span>
+              <span style="font-family:var(--font-heading);font-weight:600;font-size:13.5px;color:var(--color-text)">{{ l.priceLabel }}</span>
+              <span><span style="background:{{ l.statusBg }};color:{{ l.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:3px">{{ l.statusLabel }}</span></span>
+              <span style="font-size:12.5px;color:var(--color-text-body)">{{ l.availLabel }}</span>
+              <div style="display:flex;justify-content:flex-end">
+                <button onClick="{{ l.toggle }}" role="switch" aria-checked="{{ l.featuredBool }}" style="{{ l.switchStyle }}"><span style="{{ l.knobStyle }}"></span></button>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ adminEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:40px;text-align:center;color:var(--color-text-muted);font-size:14px">Aucun lot ne correspond.</div></sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isLeads }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:30px 34px">
+        <div class="gib-overline">Site public · Demandes de contact</div>
+        <h1 style="font-family:var(--font-heading);font-weight:700;font-size:28px;color:var(--color-text);margin:6px 0 0">Leads à recontacter</h1>
+        <p style="font-size:14px;color:var(--color-text-muted);margin:6px 0 18px">Prospects ayant demandé à être recontactés depuis une fiche bien.</p>
+
+        <div style="display:inline-flex;gap:2px;padding:3px;background:var(--gib-ivory);border-radius:6px;border:1px solid var(--color-border);margin-bottom:18px">
+          <sc-for list="{{ leadTabs }}" as="tab" hint-placeholder-count="4"><button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button></sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ leads }}" as="ld" hint-placeholder-count="5">
+            <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:6px;padding:18px 20px;display:grid;grid-template-columns:1.4fr 1.6fr 1fr;gap:22px;align-items:start">
+              <div>
+                <div style="display:flex;align-items:center;gap:11px">
+                  <div style="width:40px;height:40px;border-radius:4px;background:var(--gib-sand);color:var(--color-primary);display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-weight:700;font-size:14px;flex-shrink:0">{{ ld.initials }}</div>
+                  <div style="line-height:1.35">
+                    <div style="font-family:var(--font-heading);font-weight:600;font-size:15px;color:var(--color-text)">{{ ld.name }}</div>
+                    <div style="font-size:12.5px;color:var(--color-text-muted)">{{ ld.date }}</div>
+                  </div>
+                </div>
+                <div style="margin-top:12px;font-size:13px;color:var(--color-text-body);line-height:1.7">
+                  <div>{{ ld.email }}</div>
+                  <div style="font-family:var(--font-heading);font-weight:600;color:var(--color-text)">{{ ld.phone }}</div>
+                </div>
+              </div>
+              <div>
+                <div style="display:inline-flex;align-items:center;gap:8px;background:var(--gib-ivory);border-radius:4px;padding:6px 10px;margin-bottom:10px">
+                  <div style="width:22px;height:22px;background:{{ ld.cover }};border-radius:3px"></div>
+                  <span style="font-family:var(--font-heading);font-weight:600;font-size:12.5px;color:var(--color-text)">{{ ld.lotLabel }}</span>
+                </div>
+                <p style="font-size:13px;color:var(--color-text-body);line-height:1.6;margin:0">« {{ ld.message }} »</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <span style="align-self:flex-start;background:{{ ld.statusBg }};color:{{ ld.statusFg }};font-family:var(--font-heading);font-weight:600;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border-radius:3px">{{ ld.statusLabel }}</span>
+                <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Select" size="sm" value="{{ ld.status }}" onChange="{{ ld.setStatus }}" hint-size="100%,36px">
+                  <option value="nouveau">Nouveau</option>
+                  <option value="recontacter">À recontacter</option>
+                  <option value="traite">Traité</option>
+                </x-import>
+                <x-import component-from-global-scope="GroupeGiboireDesignSystem_a13d4b.Select" size="sm" value="{{ ld.advisor }}" onChange="{{ ld.setAdvisor }}" hint-size="100%,36px">
+                  <option value="">Assigner un conseiller…</option>
+                  <option value="Julien Marchand">Julien Marchand</option>
+                  <option value="Amélie Rocher">Amélie Rocher</option>
+                  <option value="Théo Lambert">Théo Lambert</option>
+                </x-import>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </main>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;startMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;front&quot;,&quot;admin&quot;],&quot;default&quot;:&quot;front&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;cardVariant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;editorial&quot;,&quot;compact&quot;,&quot;signature&quot;],&quot;default&quot;:&quot;editorial&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Listing front&quot;},&quot;promoRibbons&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Listing front&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const G = window.GIBOIRE;
+    const featured = {}, leadStatus = {}, leadAdvisor = {};
+    G.LOTS.forEach(l => featured[l.id] = l.featured);
+    G.LEADS.forEach(l => { leadStatus[l.id] = l.status; leadAdvisor[l.id] = l.advisor; });
+    this.state = {
+      mode: props.startMode || "front",
+      frontScreen: "list",
+      frontView: "grid",
+      cardVariant: props.cardVariant || "editorial",
+      promoRibbons: props.promoRibbons !== false,
+      currentLotId: null,
+      q: "", filterCity: "", filterType: "", filterProg: "", sort: "featured",
+      featured, leadStatus, leadAdvisor,
+      adminScreen: "biens", adminProg: "", adminQ: "", leadFilter: "all",
+      syncing: false, lastSync: "aujourd'hui 08:14",
+      form: { first: "", last: "", email: "", phone: "", message: "", rgpd: false },
+      formSent: false
+    };
+  }
+
+  componentDidMount() {
+    this._mh = (e) => {
+      if (e.data && e.data.type === "giboire-map-open") {
+        this.setState({ filterProg: e.data.prog, frontView: "grid" });
+      }
+    };
+    window.addEventListener("message", this._mh);
+  }
+  componentWillUnmount() { window.removeEventListener("message", this._mh); }
+  componentDidUpdate(prev) {
+    if (this.props.cardVariant && this.props.cardVariant !== prev.cardVariant) this.setState({ cardVariant: this.props.cardVariant });
+    if (this.props.promoRibbons !== prev.promoRibbons) this.setState({ promoRibbons: this.props.promoRibbons !== false });
+  }
+
+  // ---- formatters & meta ----
+  cover(prog) {
+    return { thabor:"#3d517c", georges:"#7f886f", chalands:"#8d6b78", rance:"#17315d", kerlann:"#8b7f83", helios:"#bb6a4a", iris:"#4a6079", prisme:"#6f7860", belleville:"#7d5f6b" }[prog] || "#3d517c";
+  }
+  statusMeta(s) {
+    return {
+      dispo: { label: "Disponible", bg: "var(--color-success-bg)", fg: "#4b5340" },
+      optionne: { label: "Optionné", bg: "var(--color-warning-bg)", fg: "#7d5715" },
+      vendu: { label: "Vendu", bg: "var(--gib-ivory)", fg: "var(--color-text-muted)" }
+    }[s];
+  }
+  leadMeta(s) {
+    return {
+      nouveau: { label: "Nouveau", bg: "var(--gib-peach)", fg: "#8a4028" },
+      recontacter: { label: "À recontacter", bg: "var(--color-info-bg)", fg: "var(--gib-blue-700)" },
+      traite: { label: "Traité", bg: "var(--color-success-bg)", fg: "#4b5340" }
+    }[s];
+  }
+  floorLabel(f) { return f <= 0 ? "RDC" : (f === 1 ? "1ᵉʳ étage" : f + "ᵉ étage"); }
+
+  enrich(l) {
+    const G = window.GIBOIRE, p = G.programById(l.prog), sm = this.statusMeta(l.status);
+    return Object.assign({}, l, {
+      progName: p.name, city: p.city, dept: p.dept, delivery: p.delivery, arch: p.arch,
+      cover: this.cover(l.prog), typeSurface: l.type + " · " + l.surface + " m²",
+      typeLabel: l.type, priceLabel: G.euro(l.price), floorLabel: this.floorLabel(l.floor),
+      balconyLabel: l.balcony > 0 ? "Balcon " + l.balcony + " m²" : "Sans balcon",
+      availLabel: l.avail, lotRef: "Lot " + l.lot,
+      statusLabel: sm.label, statusBg: sm.bg, statusFg: sm.fg
+    });
+  }
+
+  // ---- navigation ----
+  goList() { this.setState({ mode: "front", frontScreen: "list" }); }
+  openLot(id) {
+    this.setState({ currentLotId: id, frontScreen: "detail", formSent: false,
+      form: { first: "", last: "", email: "", phone: "", message: "", rgpd: false } });
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  resetFilters() { this.setState({ q: "", filterCity: "", filterType: "", filterProg: "", sort: "featured" }); }
+
+  // ---- segmented control style ----
+  seg(active, dark) {
+    const base = { border: "none", cursor: "pointer", fontFamily: "var(--font-heading)", fontSize: "13px",
+      padding: "7px 15px", borderRadius: "4px", transition: "all .16s ease", whiteSpace: "nowrap" };
+    if (dark) return Object.assign({}, base, active
+      ? { background: "#fff", color: "var(--gib-blue-900)", fontWeight: 600 }
+      : { background: "transparent", color: "rgba(255,255,255,.78)", fontWeight: 400 });
+    return Object.assign({}, base, active
+      ? { background: "var(--color-surface)", color: "var(--color-primary)", fontWeight: 600, boxShadow: "var(--shadow-xs)" }
+      : { background: "transparent", color: "var(--color-text-muted)", fontWeight: 400 });
+  }
+
+  renderVals() {
+    const G = window.GIBOIRE, S = this.state;
+
+    // ---- front listing ----
+    let list = G.LOTS.filter(l => S.featured[l.id] && l.status !== "vendu").map(l => this.enrich(l));
+    if (S.filterProg) list = list.filter(x => x.prog === S.filterProg);
+    if (S.filterCity) list = list.filter(x => x.city === S.filterCity);
+    if (S.filterType) list = list.filter(x => x.typeLabel === S.filterType);
+    if (S.q) { const s = S.q.toLowerCase(); list = list.filter(x => (x.progName + " " + x.city + " " + x.lot + " " + x.typeLabel).toLowerCase().indexOf(s) >= 0); }
+    if (S.sort === "price-asc") list.sort((a, b) => a.price - b.price);
+    else if (S.sort === "price-desc") list.sort((a, b) => b.price - a.price);
+    else if (S.sort === "surface-desc") list.sort((a, b) => b.surface - a.surface);
+    else list.sort((a, b) => b.views - a.views);
+    list.forEach(x => {
+      x.open = () => this.openLot(x.id);
+      x.showRibbon = S.promoRibbons && !!x.promoNote;
+    });
+
+    const progObj = S.filterProg ? G.programById(S.filterProg) : null;
+
+    // ---- detail ----
+    let current = null;
+    if (S.currentLotId) {
+      const raw = G.LOTS.find(l => l.id === S.currentLotId);
+      current = this.enrich(raw);
+      current.description = "Ce " + current.typeSurface + " au " + current.floorLabel.toLowerCase() +
+        " bénéficie d'une orientation " + current.orient.toLowerCase() + " et d'un séjour lumineux. " +
+        (raw.balcony > 0 ? "Son balcon de " + raw.balcony + " m² prolonge l'espace de vie. " : "") +
+        "Prestations soignées, matériaux durables — dans la tradition d'exigence de Groupe Giboire.";
+      current.facts = [
+        { k: "Typologie", v: current.type }, { k: "Surface", v: raw.surface + " m²" },
+        { k: "Étage", v: current.floorLabel }, { k: "Orientation", v: current.orient },
+        { k: "Extérieur", v: current.balconyLabel }, { k: "Disponibilité", v: current.availLabel },
+        { k: "Numéro de lot", v: current.lotRef }, { k: "Prix", v: current.priceLabel }
+      ];
+    }
+
+    // ---- admin biens ----
+    let adminLots = G.LOTS.map(l => this.enrich(l));
+    if (S.adminProg) adminLots = adminLots.filter(x => x.prog === S.adminProg);
+    if (S.adminQ) { const s = S.adminQ.toLowerCase(); adminLots = adminLots.filter(x => (x.progName + " " + x.city + " " + x.lot + " " + x.typeLabel).toLowerCase().indexOf(s) >= 0); }
+    adminLots.forEach(l => {
+      const on = !!S.featured[l.id];
+      l.featuredBool = on;
+      l.toggle = () => this.setState(st => ({ featured: Object.assign({}, st.featured, { [l.id]: !st.featured[l.id] }) }));
+      l.switchStyle = { width: "42px", height: "24px", flexShrink: 0, padding: "2px", border: "none",
+        borderRadius: "999px", cursor: "pointer", display: "flex", alignItems: "center",
+        justifyContent: on ? "flex-end" : "flex-start",
+        background: on ? "var(--color-primary)" : "var(--color-border-strong)", transition: "background .18s ease" };
+      l.knobStyle = { width: "20px", height: "20px", borderRadius: "50%", background: "#fff", boxShadow: "var(--shadow-xs)", display: "block" };
+    });
+
+    const allLots = G.LOTS;
+    const dispoCount = allLots.filter(l => l.status === "dispo").length;
+    const featCount = Object.keys(S.featured).filter(k => S.featured[k]).length;
+    const optCount = allLots.filter(l => l.status === "optionne").length;
+    const biensStats = [
+      { value: allLots.length, label: "Lots synchronisés", color: "var(--color-primary)" },
+      { value: dispoCount, label: "Disponibles", color: "var(--color-success)" },
+      { value: optCount, label: "Optionnés", color: "var(--color-warning)" },
+      { value: featCount, label: "Mis en avant (site)", color: "var(--color-accent)" }
+    ];
+
+    // ---- leads ----
+    const leadCount = { all: G.LEADS.length, nouveau: 0, recontacter: 0, traite: 0 };
+    G.LEADS.forEach(l => { leadCount[S.leadStatus[l.id]]++; });
+    let leads = G.LEADS.filter(l => S.leadFilter === "all" || S.leadStatus[l.id] === S.leadFilter).map(l => {
+      const st = S.leadStatus[l.id], lm = this.leadMeta(st), lot = this.enrich(G.LOTS.find(x => x.id === l.lot));
+      return {
+        id: l.id, name: l.first + " " + l.last, initials: (l.first[0] + l.last[0]).toUpperCase(),
+        email: l.email, phone: l.phone, date: l.date, message: l.message,
+        cover: lot.cover, lotLabel: lot.progName + " · " + lot.lotRef + " · " + lot.type,
+        status: st, statusLabel: lm.label, statusBg: lm.bg, statusFg: lm.fg,
+        advisor: S.leadAdvisor[l.id],
+        setStatus: (e) => { const v = e.target.value; this.setState(s => ({ leadStatus: Object.assign({}, s.leadStatus, { [l.id]: v }) })); },
+        setAdvisor: (e) => { const v = e.target.value; this.setState(s => ({ leadAdvisor: Object.assign({}, s.leadAdvisor, { [l.id]: v }) })); }
+      };
+    });
+
+    // ---- tabs ----
+    const modeTabs = [{ k: "front", label: "Site public" }, { k: "admin", label: "Back office" }]
+      .map(t => ({ label: t.label, style: this.seg(S.mode === t.k, true), onClick: () => this.setState({ mode: t.k }) }));
+    const viewTabs = [{ k: "grid", label: "Grille" }, { k: "map", label: "Carte" }]
+      .map(t => ({ label: t.label, style: this.seg(S.frontView === t.k, false), onClick: () => this.setState({ frontView: t.k }) }));
+    const variantTabs = [{ k: "editorial", label: "Éditorial" }, { k: "compact", label: "Compacte" }, { k: "signature", label: "Signature" }]
+      .map(t => ({ label: t.label, style: this.seg(S.cardVariant === t.k, false), onClick: () => this.setState({ cardVariant: t.k }) }));
+    const leadTabs = [{ k: "all", label: "Tous · " + leadCount.all }, { k: "nouveau", label: "Nouveaux · " + leadCount.nouveau },
+      { k: "recontacter", label: "À recontacter · " + leadCount.recontacter }, { k: "traite", label: "Traités · " + leadCount.traite }]
+      .map(t => ({ label: t.label, style: this.seg(S.leadFilter === t.k, false), onClick: () => this.setState({ leadFilter: t.k }) }));
+
+    const newLeadCount = leadCount.nouveau + leadCount.recontacter;
+    const adminNav = [
+      { k: "biens", label: "Biens en vente" }, { k: "leads", label: "Leads", badge: newLeadCount > 0, badgeCount: newLeadCount }
+    ].map(n => {
+      const on = S.adminScreen === n.k;
+      return { label: n.label, badge: n.badge, badgeCount: n.badgeCount,
+        onClick: () => this.setState({ adminScreen: n.k }),
+        style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px",
+          width: "100%", textAlign: "left", border: "none", cursor: "pointer", borderRadius: "var(--radius-sm)",
+          padding: "10px 12px", fontFamily: "var(--font-heading)", fontSize: "14.5px", fontWeight: on ? 600 : 400,
+          color: on ? "#fff" : "rgba(255,255,255,.74)", background: on ? "rgba(255,255,255,.12)" : "transparent",
+          transition: "background .16s ease" } };
+    });
+
+    const f = S.form;
+    const cannotSubmit = !(f.first && f.last && f.email && f.phone && f.rgpd);
+
+    return {
+      isFront: S.mode === "front", isAdmin: S.mode === "admin",
+      isList: S.mode === "front" && S.frontScreen === "list",
+      isDetail: S.mode === "front" && S.frontScreen === "detail",
+      isGrid: S.frontView === "grid", isMap: S.frontView === "map",
+      isEditorial: S.frontView === "grid" && S.cardVariant === "editorial",
+      isCompact: S.frontView === "grid" && S.cardVariant === "compact",
+      isSignature: S.frontView === "grid" && S.cardVariant === "signature",
+      isBiens: S.adminScreen === "biens", isLeads: S.adminScreen === "leads",
+      modeTabs, viewTabs, variantTabs, leadTabs, adminNav,
+      frontLots: list, frontCount: list.length, frontEmpty: S.frontView === "grid" && list.length === 0,
+      hasProgFilter: !!S.filterProg, progFilterLabel: progObj ? progObj.name : "",
+      clearProg: () => this.setState({ filterProg: "" }),
+      q: S.q, setQ: (e) => this.setState({ q: e.target.value }),
+      filterCity: S.filterCity, setCity: (e) => this.setState({ filterCity: e.target.value }),
+      filterType: S.filterType, setType: (e) => this.setState({ filterType: e.target.value }),
+      sort: S.sort, setSort: (e) => this.setState({ sort: e.target.value }),
+      resetFilters: () => this.resetFilters(),
+      runSearch: () => { try { const el = document.getElementById("gib-results"); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 20, behavior: "smooth" }); } catch (e) {} },
+      goList: () => this.goList(),
+      current,
+      formSent: S.formSent, formOpen: !S.formSent, form: f, cannotSubmit,
+      setFirst: (e) => this.setState({ form: Object.assign({}, S.form, { first: e.target.value }) }),
+      setLast: (e) => this.setState({ form: Object.assign({}, S.form, { last: e.target.value }) }),
+      setEmail: (e) => this.setState({ form: Object.assign({}, S.form, { email: e.target.value }) }),
+      setPhone: (e) => this.setState({ form: Object.assign({}, S.form, { phone: e.target.value }) }),
+      setMessage: (e) => this.setState({ form: Object.assign({}, S.form, { message: e.target.value }) }),
+      toggleRgpd: (e) => this.setState({ form: Object.assign({}, S.form, { rgpd: e.target.checked }) }),
+      submitForm: () => { if (!cannotSubmit) this.setState({ formSent: true }); },
+      resetForm: () => this.setState({ formSent: false, form: { first: "", last: "", email: "", phone: "", message: "", rgpd: false } }),
+      adminLots, adminEmpty: adminLots.length === 0, biensStats,
+      adminQ: S.adminQ, setAdminQ: (e) => this.setState({ adminQ: e.target.value }),
+      adminProg: S.adminProg, setAdminProg: (e) => this.setState({ adminProg: e.target.value }),
+      progOptions: G.PROGRAMS.map(p => ({ id: p.id, name: p.name })),
+      lastSync: S.lastSync, syncing: S.syncing, syncLabel: S.syncing ? "Synchronisation…" : "Synchroniser UnLatch",
+      startSync: () => { this.setState({ syncing: true }); setTimeout(() => this.setState({ syncing: false, lastSync: "à l'instant" }), 1400); },
+      leads
+    };
+  }
+}
+</script>
+</body>
+</html>

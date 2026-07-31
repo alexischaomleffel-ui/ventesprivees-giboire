@@ -1,0 +1,9 @@
+/* Groupe Giboire — Design System
+   Global CSS entry point. Consumers link this single file.
+   Import list only — no rules declared here directly. */
+
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/base.css";

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/radius.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/styles.css">
+  <script src="_ds/giboire-design-system-1525010e-43eb-4222-b497-2401770fb387/_ds_bundle.js"></script>
+  <script src="giboire-data.js"></script>
+  <script src="giboire-images.js"></script>
+  <script src="image-slot.js"></script>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body)}
+    a{color:var(--text-link);text-decoration:none}
+    a:hover{color:var(--text-link-hover);text-decoration:underline;text-underline-offset:.15em}
+    ::selection{background:var(--blue-100)}
+    input,select,textarea,button{font-family:inherit}
+    .gib-overline{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted)}
+    .gib-app{--gib-sp:1}
+    .gib-app[data-density="compact"]{--gib-sp:.62}
+    .gib-app[data-density="spacious"]{--gib-sp:1.42}
+    .gib-app .gib-gap-xl{gap:calc(40px * var(--gib-sp)) !important}
+    .gib-app .gib-gap-lg{gap:calc(26px * var(--gib-sp)) !important}
+    .gib-app .gib-gap-md{gap:calc(18px * var(--gib-sp)) !important}
+    .gib-app .gib-gap-sm{gap:calc(11px * var(--gib-sp)) !important}
+    .gib-app .gib-pad-sec{padding-top:calc(30px * var(--gib-sp)) !important;padding-bottom:calc(26px * var(--gib-sp)) !important}
+    .gib-app .gib-pad-hero{padding-top:calc(52px * var(--gib-sp)) !important;padding-bottom:calc(34px * var(--gib-sp)) !important}
+    .gib-app .gib-pad-card{padding:calc(16px * var(--gib-sp)) calc(18px * var(--gib-sp)) !important}
+    .gib-app .gib-mt-sec{margin-top:calc(32px * var(--gib-sp)) !important}
+    .gib-app{--gib-r:16px;--gib-r-md:14px;--gib-r-sm:10px;--gib-r-xs:8px;--gib-r-pill:999px}
+    .gib-app[data-corners="square"]{--gib-r:0px;--gib-r-md:0px;--gib-r-sm:0px;--gib-r-xs:0px;--gib-r-pill:2px}
+    .gib-app[data-corners="square"] input,.gib-app[data-corners="square"] select,.gib-app[data-corners="square"] textarea,.gib-app[data-corners="square"] button{border-radius:2px !important}
+    @keyframes gibFadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+    @keyframes gibFadeIn{from{opacity:0}to{opacity:1}}
+    .gib-reveal{opacity:0}
+    .gib-reveal.gib-in{animation:gibFadeUp .62s cubic-bezier(.4,0,.2,1) both}
+    .gib-stagger.gib-in > *{opacity:0;animation:gibFadeUp .55s cubic-bezier(.4,0,.2,1) both}
+    .gib-stagger.gib-in > *:nth-child(1){animation-delay:.03s}
+    .gib-stagger.gib-in > *:nth-child(2){animation-delay:.09s}
+    .gib-stagger.gib-in > *:nth-child(3){animation-delay:.15s}
+    .gib-stagger.gib-in > *:nth-child(4){animation-delay:.21s}
+    .gib-stagger.gib-in > *:nth-child(5){animation-delay:.27s}
+    .gib-stagger.gib-in > *:nth-child(6){animation-delay:.33s}
+    .gib-stagger.gib-in > *:nth-child(n+7){animation-delay:.39s}
+    .gib-zoomframe{overflow:hidden}
+    .gib-zoom{transition:transform .55s cubic-bezier(.4,0,.2,1)}
+    .gib-scard:hover .gib-zoom{transform:scale(1.06)}
+    .gib-arrow{display:inline-block;transition:transform .22s cubic-bezier(.4,0,.2,1)}
+    .gib-scard:hover .gib-arrow{transform:translateX(5px)}
+    .gib-price{transition:transform .22s cubic-bezier(.4,0,.2,1);transform-origin:left}
+    .gib-scard:hover .gib-price{transform:scale(1.05)}
+    .gib-liftrow{transition:box-shadow .16s ease,border-color .16s ease,transform .16s ease}
+    .gib-liftrow:hover{transform:translateX(3px)}
+    @media (prefers-reduced-motion: reduce){.gib-reveal,.gib-reveal.gib-in,.gib-stagger.gib-in > *{animation:none !important;opacity:1 !important}}
+  </style>
+</helmet>
+
+<div class="gib-app" data-corners="{{ corners }}" data-density="{{ density }}" style="min-height:100vh;display:flex;flex-direction:column;background:var(--surface-page)">
+
+  <div style="height:46px;background:var(--blue-900);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 22px;flex-shrink:0;position:sticky;top:0;z-index:50">
+    <span style="font-family:var(--font-display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.72)">Groupe Giboire · Mini-SaaS · Prototype interne</span>
+    <div style="display:inline-flex;gap:2px;padding:3px;background:rgba(255,255,255,.12);border-radius:var(--gib-r-xs)">
+      <sc-for list="{{ modeTabs }}" as="tab" hint-placeholder-count="2">
+        <button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ isFront }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;display:flex;flex-direction:column">
+    <header style="background:var(--surface-card);border-bottom:1px solid var(--border-subtle);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div style="display:flex;align-items:center;gap:16px;cursor:pointer" onClick="{{ goList }}">
+        <img src="assets/logo-full.jpg" alt="Groupe Giboire" style="width:44px;height:44px;border-radius:var(--gib-r-sm);object-fit:cover;display:block">
+        <div style="border-left:1px solid var(--divider);padding-left:16px">
+          <div class="gib-overline">Programmes neufs</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--text-strong)">Nos programmes neufs</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:18px">
+        <span style="font-size:13px;color:var(--text-muted)">Un conseiller vous accompagne</span>
+        <span style="font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--color-primary)">02 99 00 00 00</span>
+      </div>
+    </header>
+
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:1">
+      <sc-if value="{{ heroSplit }}" hint-placeholder-val="{{ false }}">
+      <section class="gib-pad-hero" style="max-width:1280px;margin:0 auto;width:100%;padding:52px 40px 34px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:54px;align-items:center">
+        <div>
+          <div class="gib-overline" style="color:var(--color-accent)">Grand Ouest · Édition 2026</div>
+          <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;color:var(--text-strong);font-size:52px;margin:14px 0 0;max-width:13ch;line-height:1.04">Les derniers biens <em style="font-weight:300;font-style:italic;color:var(--color-primary)">à saisir</em></h1>
+          <p style="font-size:16px;line-height:1.65;color:var(--text-body);max-width:47ch;margin:18px 0 0">Une sélection d'appartements neufs encore disponibles dans nos résidences. Affinez votre recherche par ville et typologie — un conseiller vous accompagne à chaque étape.</p>
+          <div style="margin-top:30px">
+            <dc-import name="Giboire-SearchBar" q="{{ q }}" set-q="{{ setQ }}" filter-type="{{ filterType }}" set-type="{{ setType }}" filter-city="{{ filterCity }}" set-city="{{ setCity }}" run-search="{{ runSearch }}" hint-size="100%,64px"></dc-import>
+          </div>
+        </div>
+        <div style="position:relative">
+          <div class="gib-scard" style="position:relative">
+          <div class="gib-zoomframe" style="position:relative;border-radius:var(--gib-r);box-shadow:var(--shadow-md);aspect-ratio:4/3">
+            <div class="gib-zoom" style="position:absolute;inset:0;background:{{ heroBg }}"></div>
+            <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:24px">
+              <div style="position:relative;color:rgba(255,255,255,.82);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase">Résidences neuves</div>
+              <div style="position:relative;color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:26px;line-height:1.1;margin-top:4px">Vos rêves prennent vie ici.</div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+      </sc-if>
+
+      <sc-if value="{{ heroImmersive }}" hint-placeholder-val="{{ true }}">
+      <section style="position:relative;max-width:1280px;margin:22px auto 34px;width:calc(100% - 48px);border-radius:var(--gib-r);overflow:hidden;background:{{ heroImmersiveBg }};min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 56px 40px">
+        <div style="position:relative;max-width:660px">
+          <div class="gib-overline" style="color:#fff;opacity:.85">Grand Ouest · Édition 2026</div>
+          <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;color:#fff;font-size:56px;margin:14px 0 0;max-width:15ch;line-height:1.03"><em style="font-weight:300;font-style:italic;color:var(--coral-300)">Les ventes privées</em><br>GIBOIRE</h1>
+          <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,.9);max-width:48ch;margin:16px 0 0">Des adresses d'exception, disponibles dès maintenant.</p>
+        </div>
+        <div style="position:relative;margin-top:28px">
+          <dc-import name="Giboire-SearchBar" q="{{ q }}" set-q="{{ setQ }}" filter-type="{{ filterType }}" set-type="{{ setType }}" filter-city="{{ filterCity }}" set-city="{{ setCity }}" run-search="{{ runSearch }}" hint-size="100%,64px"></dc-import>
+        </div>
+      </section>
+      </sc-if>
+
+      <sc-if value="{{ heroPanel }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width:1280px;margin:0 auto;width:100%;padding:36px 40px 34px">
+        <div style="background:var(--blue-900);border-radius:var(--gib-r);padding:52px 48px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:44px;align-items:end;position:relative;overflow:hidden">
+          <div style="position:relative">
+            <div class="gib-overline" style="color:var(--coral-300)">Grand Ouest · Édition 2026</div>
+            <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;color:#fff;font-size:52px;margin:14px 0 0;max-width:14ch;line-height:1.04">Les derniers biens <em style="font-weight:300;font-style:italic;color:var(--coral-300)">à saisir</em></h1>
+            <div style="font-family:var(--font-display);font-weight:300;font-style:italic;font-size:22px;color:rgba(255,255,255,.9);margin-top:16px">Vos rêves prennent vie ici.</div>
+          </div>
+          <div style="position:relative;display:flex;gap:14px">
+            <div style="flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:var(--gib-r-md);padding:18px 20px">
+              <div style="font-family:var(--font-display);font-weight:800;font-size:34px;color:#fff;line-height:1">{{ frontCount }}</div>
+              <div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px">biens disponibles</div>
+            </div>
+            <div style="flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:var(--gib-r-md);padding:18px 20px">
+              <div style="font-family:var(--font-display);font-weight:800;font-size:34px;color:#fff;line-height:1">9</div>
+              <div style="font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px">résidences neuves</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:-34px;position:relative;z-index:2;padding:0 20px">
+          <dc-import name="Giboire-SearchBar" q="{{ q }}" set-q="{{ setQ }}" filter-type="{{ filterType }}" set-type="{{ setType }}" filter-city="{{ filterCity }}" set-city="{{ setCity }}" run-search="{{ runSearch }}" hint-size="100%,64px"></dc-import>
+        </div>
+      </section>
+      </sc-if>
+
+      <section id="gib-results" class="gib-reveal gib-gap-md gib-pad-sec" style="max-width:1280px;margin:0 auto;width:100%;padding:26px 40px 12px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div>
+            <div class="gib-overline" style="color:var(--color-accent)">La sélection</div>
+            <h2 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:24px;color:var(--text-strong);margin:5px 0 0">Nos programmes · {{ progCount }}</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <sc-if value="{{ hasProgFilter }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ clearProg }}" style="display:inline-flex;align-items:center;gap:7px;background:var(--surface-sunken);border:1px solid var(--border-default);border-radius:var(--gib-r-pill);padding:6px 12px;font-size:12.5px;color:var(--text-strong);cursor:pointer">{{ progFilterLabel }} <span style="color:var(--text-muted);font-size:14px">×</span></button>
+            </sc-if>
+            <div style="display:inline-flex;gap:2px;padding:3px;background:var(--surface-sunken);border-radius:var(--gib-r-xs);border:1px solid var(--border-subtle)">
+              <sc-for list="{{ homeTabs }}" as="tab" hint-placeholder-count="2"><button onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</button></sc-for>
+            </div>
+          </div>
+        </div>
+
+        <sc-if value="{{ isHomeMap }}" hint-placeholder-val="{{ false }}">
+        <div class="gib-gap-md" style="display:grid;grid-template-columns:minmax(340px,0.92fr) 1.08fr;gap:18px;align-items:start">
+          <div class="gib-gap-sm" style="max-height:648px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:2px 6px 2px 2px">
+            <sc-for list="{{ frontPrograms }}" as="prog" hint-placeholder-count="5">
+              <div onClick="{{ prog.open }}" onMouseEnter="{{ prog.hl }}" onMouseLeave="{{ prog.unhl }}" class="gib-liftrow" style="flex:0 0 auto;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r-md);overflow:hidden;cursor:pointer;display:flex;box-shadow:var(--shadow-xs)" style-hover="box-shadow:var(--shadow-md);border-color:var(--border-default)">
+                <div style="position:relative;width:112px;flex-shrink:0;background:{{ prog.thumb }}">
+                  <span style="position:absolute;top:8px;left:8px;background:var(--color-accent);color:#fff;font-family:var(--font-body);font-weight:700;font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;padding:3px 7px;border-radius:var(--gib-r-xs)">{{ prog.badgeLabel }}</span>
+                </div>
+                <div style="padding:12px 14px;display:flex;flex-direction:column;gap:5px;flex:1;min-width:0">
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)">{{ prog.city }} · {{ prog.dept }}</div>
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ prog.name }}</div>
+                  <div style="font-size:12px;color:var(--text-muted)">{{ prog.typesLabel }} · {{ prog.surfaceLabel }}</div>
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--color-primary)">{{ prog.fromLabel }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="position:sticky;top:70px;border:1px solid var(--border-default);border-radius:var(--gib-r);overflow:hidden;box-shadow:var(--shadow-sm)">
+            <iframe id="gib-map" src="carte-programmes.html" title="Carte des programmes" style="width:100%;height:648px;border:0;display:block"></iframe>
+          </div>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-muted);margin:8px 2px 0">Survolez un programme pour le localiser · cliquez un repère pour ouvrir sa page.</p>
+        </sc-if>
+
+        <sc-if value="{{ isSignature }}" hint-placeholder-val="{{ true }}">
+        <div class="gib-stagger gib-reveal gib-gap-lg" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px;padding-top:6px">
+          <sc-for list="{{ frontPrograms }}" as="prog" hint-placeholder-count="6">
+            <div onClick="{{ prog.open }}" class="gib-scard" style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r);box-shadow:var(--shadow-sm);cursor:pointer;padding:12px 12px 18px;display:flex;flex-direction:column;transition:box-shadow .2s ease,transform .2s ease" style-hover="box-shadow:var(--shadow-lg);transform:translateY(-4px)">
+              <div class="gib-zoomframe" style="position:relative;aspect-ratio:1/1;border-radius:var(--gib-r-sm);border-bottom:8px solid var(--color-accent)">
+                <div class="gib-zoom" style="position:absolute;inset:0;background:{{ prog.coverC }}"></div>
+                <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px">
+                  <span style="background:var(--color-accent);color:#fff;font-family:var(--font-body);font-weight:700;font-size:10px;letter-spacing:.03em;text-transform:uppercase;padding:4px 9px;border-radius:var(--gib-r-xs);position:absolute;top:12px;right:12px">{{ prog.badgeLabel }}</span>
+                  <div style="color:rgba(255,255,255,.78);font-family:var(--font-display);font-weight:700;font-size:10px;letter-spacing:.16em;text-transform:uppercase">{{ prog.city }} · {{ prog.dept }}</div>
+                  <div style="color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:25px;line-height:1.12;margin-top:6px">{{ prog.name }}</div>
+                </div>
+              </div>
+              <div style="padding:16px 6px 0;display:flex;flex-direction:column;gap:8px">
+                <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--text-strong)">{{ prog.typesLabel }} · {{ prog.surfaceLabel }}</div>
+                <div style="font-size:12.5px;color:var(--text-muted)">Livraison {{ prog.delivery }} · {{ prog.countLabel }}</div>
+                <div style="margin-top:4px">
+                  <div class="gib-price" style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--color-accent);white-space:nowrap">{{ prog.fromLabel }}</div>
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--color-primary);margin-top:8px">Le programme <span class="gib-arrow">→</span></div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ frontEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:56px 20px;color:var(--text-muted)">Aucun programme ne correspond à votre recherche. <button onClick="{{ resetFilters }}" style="background:none;border:none;color:var(--text-link);cursor:pointer;font-size:inherit;text-decoration:underline">Réinitialiser les filtres</button></div>
+        </sc-if>
+        <div style="height:48px"></div>
+      </section>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isProgram }}" hint-placeholder-val="{{ false }}">
+    <div class="gib-reveal" style="max-width:1180px;margin:0 auto;width:100%;padding:24px 40px 60px">
+      <button onClick="{{ goList }}" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:13px;padding:6px 0;display:inline-flex;align-items:center;gap:6px">← Retour aux programmes</button>
+      <div class="gib-gap-xl" style="display:grid;grid-template-columns:1fr 380px;gap:40px;margin-top:12px;align-items:start">
+        <div>
+          <div onClick="{{ currentProg.openLightbox }}" class="gib-zoomframe" style="position:relative;height:360px;border-radius:var(--gib-r);cursor:pointer">
+            <div class="gib-zoom" style="position:absolute;inset:0;background:{{ currentProg.mainBg }}"></div>
+            <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:28px">
+              <span style="position:absolute;top:20px;right:20px;background:var(--color-accent);color:#fff;font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.03em;text-transform:uppercase;padding:6px 12px;border-radius:var(--gib-r-xs)">{{ currentProg.countLabel }}</span>
+              <span style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,.92);color:var(--blue-800);font-family:var(--font-display);font-weight:700;font-size:12px;padding:7px 13px;border-radius:var(--gib-r-pill);display:inline-flex;align-items:center;gap:6px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg> Voir les photos</span>
+              <div style="color:rgba(255,255,255,.82);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase">{{ currentProg.city }} · {{ currentProg.dept }}</div>
+              <div style="color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:38px;line-height:1.06;margin-top:6px">{{ currentProg.name }}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <sc-for list="{{ currentProg.gallery }}" as="ph" hint-placeholder-count="4">
+              <div onClick="{{ ph.openBox }}" style="{{ ph.thumbStyle }}"></div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:30px">
+            <div class="gib-overline" style="color:var(--color-accent)">Le programme</div>
+            <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:30px;color:var(--text-strong);margin:6px 0 0">{{ currentProg.name }}</h1>
+            <p style="font-size:15px;line-height:1.7;color:var(--text-body);margin:14px 0 0;max-width:62ch">{{ currentProg.description }}</p>
+          </div>
+
+          <div style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--divider);border:1px solid var(--divider);border-radius:var(--gib-r);overflow:hidden">
+            <sc-for list="{{ currentProg.facts }}" as="f" hint-placeholder-count="6">
+              <div style="background:var(--surface-card);padding:16px 18px">
+                <div class="gib-overline">{{ f.k }}</div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--text-strong);margin-top:5px">{{ f.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:36px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div>
+              <div class="gib-overline" style="color:var(--color-accent)">Les biens disponibles</div>
+              <h2 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:22px;color:var(--text-strong);margin:5px 0 0">{{ currentProg.countLabel }}</h2>
+            </div>
+            <span style="font-size:13px;color:var(--text-muted)">À partir de <b style="font-family:var(--font-display);color:var(--color-primary)">{{ currentProg.fromLabel }}</b></span>
+          </div>
+
+          <div class="gib-stagger gib-gap-sm" style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+            <sc-for list="{{ currentProg.lots }}" as="lot" hint-placeholder-count="4">
+              <div onClick="{{ lot.open }}" class="gib-liftrow" style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r-md);padding:14px 18px;cursor:pointer;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;box-shadow:var(--shadow-xs)" style-hover="box-shadow:var(--shadow-md);border-color:var(--border-default)">
+                <div style="font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--color-primary);flex:0 0 auto;min-width:70px">{{ lot.lotRef }}</div>
+                <div style="flex:1 1 190px;min-width:0">
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--text-strong);white-space:nowrap">{{ lot.typeSurface }}</div>
+                  <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px">{{ lot.floorLabel }} · {{ lot.orient }} · {{ lot.balconyLabel }}</div>
+                </div>
+                <span style="flex:0 0 auto;background:{{ lot.statusBg }};color:{{ lot.statusFg }};font-family:var(--font-body);font-weight:700;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;padding:5px 10px;border-radius:var(--gib-r-xs)">{{ lot.statusLabel }}</span>
+                <div style="flex:0 0 auto;display:flex;align-items:center;gap:16px;margin-left:auto">
+                  <span class="gib-price" style="font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--text-strong);white-space:nowrap">{{ lot.priceLabel }}</span>
+                  <span style="font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--color-primary);white-space:nowrap">Voir le lot <span class="gib-arrow">→</span></span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="position:sticky;top:70px">
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--gib-r);padding:24px;box-shadow:var(--shadow-sm)">
+            <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:14px 4px">
+                <div style="width:52px;height:52px;background:var(--color-success-soft);color:var(--color-success);border-radius:var(--gib-r-sm);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px">✓</div>
+                <div style="font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--text-strong)">Demande envoyée</div>
+                <p style="font-size:14px;color:var(--text-body);line-height:1.6;margin:10px 0 18px">Merci {{ form.first }}. Votre conseiller vous adresse la plaquette complète et les disponibilités du programme {{ currentProg.name }} sous 24 h ouvrées.</p>
+                <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="secondary" fullWidth="{{ true }}" onClick="{{ resetForm }}" hint-size="100%,46px">Nouvelle demande</x-import>
+              </div>
+            </sc-if>
+            <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <div class="gib-overline" style="color:var(--color-accent)">Documentation</div>
+                <h3 style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--text-strong);margin:6px 0 4px">Recevoir la plaquette</h3>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5;margin:0 0 18px">Plan de masse, typologies et disponibilités du programme complet. Un conseiller vous répond sous 24 h.</p>
+                <div style="background:var(--surface-sunken);border-radius:var(--gib-r-sm);padding:10px 12px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+                  <div style="width:34px;height:34px;background:{{ currentProg.thumbBg }};border-radius:var(--gib-r-xs);flex-shrink:0"></div>
+                  <div style="line-height:1.35">
+                    <div style="font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--text-strong)">{{ currentProg.name }}</div>
+                    <div style="font-size:12px;color:var(--text-muted)">{{ currentProg.city }} · Livraison {{ currentProg.delivery }}</div>
+                  </div>
+                </div>
+                <div class="gib-gap-sm" style="display:flex;flex-direction:column;gap:13px">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div style="min-width:0"><x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Prénom *" value="{{ form.first }}" onChange="{{ setFirst }}" placeholder="Prénom" hint-size="100%,74px"></x-import></div>
+                    <div style="min-width:0"><x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Nom *" value="{{ form.last }}" onChange="{{ setLast }}" placeholder="Nom" hint-size="100%,74px"></x-import></div>
+                  </div>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Email *" type="email" value="{{ form.email }}" onChange="{{ setEmail }}" placeholder="vous@exemple.fr" hint-size="100%,74px"></x-import>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Téléphone *" value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="06 00 00 00 00" hint-size="100%,74px"></x-import>
+                  <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:12.5px;color:var(--text-body);line-height:1.5">
+                    <input type="checkbox" checked="{{ form.rgpd }}" onChange="{{ toggleRgpd }}" style="width:17px;height:17px;margin-top:1px;accent-color:var(--color-primary);flex-shrink:0">
+                    <span>J'accepte que Groupe Giboire utilise mes données pour me recontacter au sujet de ce programme.</span>
+                  </label>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="accent" fullWidth="{{ true }}" onClick="{{ submitForm }}" disabled="{{ cannotSubmit }}" hint-size="100%,46px">Recevoir la documentation</x-import>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:14px;padding:0 4px;color:var(--text-muted);font-size:12.5px">
+            <span style="font-family:var(--font-display);font-weight:800;color:var(--color-primary);font-size:15px">02 99 00 00 00</span> · Du lundi au samedi
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1180px;margin:0 auto;width:100%;padding:24px 40px 60px">
+      <button onClick="{{ goProgram }}" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:13px;padding:6px 0;display:inline-flex;align-items:center;gap:6px">← Retour au programme</button>
+      <div class="gib-gap-xl" style="display:grid;grid-template-columns:1fr 380px;gap:40px;margin-top:12px;align-items:start">
+        <div>
+          <div onClick="{{ current.openLightbox }}" style="position:relative;height:340px;background:{{ current.mainBg }};border-radius:var(--gib-r);display:flex;flex-direction:column;justify-content:flex-end;padding:26px;overflow:hidden;cursor:pointer">
+            <span style="position:absolute;top:20px;right:20px;background:{{ current.statusBg }};color:{{ current.statusFg }};font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.03em;text-transform:uppercase;padding:6px 12px;border-radius:var(--gib-r-xs)">{{ current.statusLabel }}</span>
+            <div style="position:relative;color:rgba(255,255,255,.82);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase">{{ current.city }} · {{ current.dept }}</div>
+            <div style="position:relative;color:#fff;font-family:var(--font-display);font-weight:300;font-style:italic;font-size:34px;line-height:1.08;margin-top:6px">{{ current.progName }}</div>
+            <span style="position:absolute;top:20px;left:20px;background:rgba(255,255,255,.92);color:var(--blue-800);font-family:var(--font-display);font-weight:700;font-size:12px;padding:7px 13px;border-radius:var(--gib-r-pill);display:inline-flex;align-items:center;gap:6px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg> Voir les photos</span>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <sc-for list="{{ current.gallery }}" as="ph" hint-placeholder-count="4">
+              <div onClick="{{ ph.openBox }}" style="{{ ph.thumbStyle }}"></div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:30px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+              <h2 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:26px;color:var(--text-strong);margin:0">{{ current.typeSurface }} — {{ current.lotRef }}</h2>
+              <span style="font-family:var(--font-display);font-weight:800;font-size:30px;color:var(--color-primary)">{{ current.priceLabel }}</span>
+            </div>
+            <p style="font-size:15px;line-height:1.65;color:var(--text-body);margin:16px 0 0;max-width:60ch">{{ current.description }}</p>
+          </div>
+
+          <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1px;background:var(--divider);border:1px solid var(--divider);border-radius:var(--gib-r);overflow:hidden">
+            <sc-for list="{{ current.facts }}" as="f" hint-placeholder-count="6">
+              <div style="background:var(--surface-card);padding:16px 18px">
+                <div class="gib-overline">{{ f.k }}</div>
+                <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--text-strong);margin-top:5px">{{ f.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:28px;padding:20px 22px;background:var(--neutral-50);border:1px solid var(--border-subtle);border-radius:var(--gib-r);display:flex;gap:18px;align-items:flex-start">
+            <div style="width:6px;align-self:stretch;background:var(--color-accent);border-radius:3px;flex-shrink:0"></div>
+            <div>
+              <div class="gib-overline">Le programme</div>
+              <div style="font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--text-strong);margin-top:4px">{{ current.progName }}</div>
+              <div style="font-size:13.5px;color:var(--text-body);line-height:1.6;margin-top:6px">Livraison prévue : {{ current.delivery }} · Architecte : {{ current.arch }}<br>Nous vous accompagnons de la réservation à la remise des clés.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="position:sticky;top:70px">
+          <div style="background:var(--surface-card);border:1px solid var(--border-default);border-radius:var(--gib-r);padding:24px;box-shadow:var(--shadow-sm)">
+            <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:14px 4px">
+                <div style="width:52px;height:52px;background:var(--color-success-soft);color:var(--color-success);border-radius:var(--gib-r-sm);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px">✓</div>
+                <div style="font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--text-strong)">Demande envoyée</div>
+                <p style="font-size:14px;color:var(--text-body);line-height:1.6;margin:10px 0 18px">Merci {{ form.first }}. Votre conseiller vous recontacte sous 24 h ouvrées au sujet du {{ current.typeSurface }} — {{ current.progName }}.</p>
+                <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="secondary" fullWidth="{{ true }}" onClick="{{ resetForm }}" hint-size="100%,46px">Nouvelle demande</x-import>
+              </div>
+            </sc-if>
+            <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+              <div>
+                <div class="gib-overline" style="color:var(--color-accent)">Renseignements</div>
+                <h3 style="font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--text-strong);margin:6px 0 4px">Être recontacté</h3>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.5;margin:0 0 18px">Un conseiller vous répond sous 24 h. Nous ne partageons jamais vos coordonnées.</p>
+                <div style="background:var(--surface-sunken);border-radius:var(--gib-r-sm);padding:10px 12px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+                  <div style="width:34px;height:34px;background:{{ current.thumb }};border-radius:var(--gib-r-xs);flex-shrink:0"></div>
+                  <div style="line-height:1.35">
+                    <div style="font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--text-strong)">{{ current.typeSurface }} · {{ current.lotRef }}</div>
+                    <div style="font-size:12px;color:var(--text-muted)">{{ current.progName }} — {{ current.city }}</div>
+                  </div>
+                </div>
+                <div class="gib-gap-sm" style="display:flex;flex-direction:column;gap:13px">
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                    <div style="min-width:0"><x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Prénom *" value="{{ form.first }}" onChange="{{ setFirst }}" placeholder="Prénom" hint-size="100%,74px"></x-import></div>
+                    <div style="min-width:0"><x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Nom *" value="{{ form.last }}" onChange="{{ setLast }}" placeholder="Nom" hint-size="100%,74px"></x-import></div>
+                  </div>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Email *" type="email" value="{{ form.email }}" onChange="{{ setEmail }}" placeholder="vous@exemple.fr" hint-size="100%,74px"></x-import>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Input" label="Téléphone *" value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="06 00 00 00 00" hint-size="100%,74px"></x-import>
+                  <label style="display:flex;flex-direction:column;gap:6px;font-family:var(--font-body)">
+                    <span style="font-size:14px;font-weight:600;color:var(--text-body)">Votre message</span>
+                    <textarea value="{{ form.message }}" onChange="{{ setMessage }}" rows="3" placeholder="Une question, un créneau de visite souhaité…" style="width:100%;border:1.5px solid var(--border-default);border-radius:var(--gib-r-sm);padding:12px 16px;font-size:15px;color:var(--text-strong);resize:vertical;outline:none;background:#fff"></textarea>
+                  </label>
+                  <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:12.5px;color:var(--text-body);line-height:1.5">
+                    <input type="checkbox" checked="{{ form.rgpd }}" onChange="{{ toggleRgpd }}" style="width:17px;height:17px;margin-top:1px;accent-color:var(--color-primary);flex-shrink:0">
+                    <span>J'accepte que Groupe Giboire utilise mes données pour me recontacter au sujet de ce bien.</span>
+                  </label>
+                  <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="accent" fullWidth="{{ true }}" onClick="{{ submitForm }}" disabled="{{ cannotSubmit }}" hint-size="100%,46px">Envoyer ma demande</x-import>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:14px;padding:0 4px;color:var(--text-muted);font-size:12.5px">
+            <span style="font-family:var(--font-display);font-weight:800;color:var(--color-primary);font-size:15px">02 99 00 00 00</span> · Du lundi au samedi
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLightbox }}" style="position:fixed;inset:0;z-index:100;background:rgba(9,18,36,.93);display:flex;flex-direction:column;padding:26px 30px 30px">
+      <div style="display:flex;align-items:center;justify-content:space-between;color:#fff;flex-shrink:0">
+        <span style="font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.05em">{{ lightboxCounter }}</span>
+        <button onClick="{{ closeLightbox }}" aria-label="Fermer" style="width:42px;height:42px;border:none;border-radius:var(--gib-r-pill);background:rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer;line-height:1">×</button>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;gap:18px;min-height:0;padding:18px 0">
+        <button onClick="{{ prevPhoto }}" aria-label="Précédent" style="flex-shrink:0;width:54px;height:54px;border:none;border-radius:var(--gib-r-pill);background:rgba(255,255,255,.14);color:#fff;font-size:26px;cursor:pointer;line-height:1">‹</button>
+        <div style="flex:1;align-self:stretch;background:{{ lightboxBg }};border-radius:var(--gib-r-md)"></div>
+        <button onClick="{{ nextPhoto }}" aria-label="Suivant" style="flex-shrink:0;width:54px;height:54px;border:none;border-radius:var(--gib-r-pill);background:rgba(255,255,255,.14);color:#fff;font-size:26px;cursor:pointer;line-height:1">›</button>
+      </div>
+    </div>
+    </sc-if>
+    </sc-if>
+
+    <footer class="gib-reveal" style="background:var(--blue-900);color:#fff;margin-top:56px">
+      <div style="max-width:1280px;margin:0 auto;padding:60px 40px 30px">
+        <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px">
+          <div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <img src="assets/logo-full.jpg" alt="Groupe Giboire" style="width:42px;height:42px;border-radius:var(--gib-r-sm);object-fit:cover;display:block">
+              <div style="line-height:1">
+                <div style="font-family:var(--font-display);font-weight:600;font-size:9px;letter-spacing:.32em;color:rgba(255,255,255,.7)">GROUPE</div>
+                <div style="font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:.02em;color:#fff;margin-top:2px">GIBOIRE</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px;margin-top:26px">
+              <a href="mailto:contact@giboire.com" style="display:flex;align-items:center;gap:11px;color:rgba(255,255,255,.85);font-size:14.5px;text-decoration:none">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 5L2 7"></path></svg>
+                contact@giboire.com
+              </a>
+              <a href="tel:+33299000000" style="display:flex;align-items:center;gap:11px;color:rgba(255,255,255,.85);font-size:14.5px;text-decoration:none">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                02 99 00 00 00
+              </a>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:#fff">Nos services</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+              <sc-for list="{{ footerServices }}" as="link" hint-placeholder-count="5">
+                <a href="#" style="color:rgba(255,255,255,.68);font-size:14px;text-decoration:none">{{ link }}</a>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:#fff">Le groupe</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+              <sc-for list="{{ footerGroup }}" as="link" hint-placeholder-count="5">
+                <a href="#" style="color:rgba(255,255,255,.68);font-size:14px;text-decoration:none">{{ link }}</a>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:15px;color:#fff">Être accompagné</div>
+            <div style="margin-top:20px">
+              <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="accent" hint-size="auto,46px">Prendre rendez-vous</x-import>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:22px">
+              <a href="#" aria-label="Instagram" style="width:38px;height:38px;border-radius:var(--gib-r-pill);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a>
+              <a href="#" aria-label="LinkedIn" style="width:38px;height:38px;border-radius:var(--gib-r-pill);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+              <a href="#" aria-label="Facebook" style="width:38px;height:38px;border-radius:var(--gib-r-pill);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:48px;background:var(--blue-800);border:1px solid rgba(255,255,255,.1);border-radius:var(--gib-r);padding:38px 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:30px;align-items:center;overflow:hidden">
+          <div>
+            <div style="font-family:var(--font-display);font-weight:800;font-size:28px;color:#fff;letter-spacing:-.01em">Un projet immobilier&nbsp;?</div>
+            <p style="font-size:15px;line-height:1.6;color:rgba(255,255,255,.78);max-width:44ch;margin:12px 0 0">Nos conseillers vous accompagnent de la recherche à la remise des clés. Parlons de votre projet — sans engagement.</p>
+          </div>
+          <div style="display:flex;gap:14px;justify-content:flex-end;flex-wrap:wrap">
+            <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="accent" hint-size="auto,48px">Nous contacter</x-import>
+            <button style="border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-family:var(--font-body);font-weight:700;font-size:15px;padding:0 22px;height:48px;border-radius:var(--gib-r-sm);cursor:pointer;transition:background .16s ease,border-color .16s ease" style-hover="background:rgba(255,255,255,.1);border-color:#fff">Estimer mon bien</button>
+          </div>
+        </div>
+
+        <div style="margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div style="font-family:var(--font-display);font-weight:300;font-style:italic;font-size:16px;color:rgba(255,255,255,.85)">Vos rêves prennent vie ici.</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.55)">© 2026 Groupe Giboire · Groupe familial centenaire, acteur immobilier national d'origine bretonne.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;display:flex;min-height:0">
+    <aside style="width:236px;flex-shrink:0;background:var(--blue-900);color:#fff;display:flex;flex-direction:column;padding:22px 14px">
+      <div style="padding:0 8px 22px">
+        <div style="line-height:1">
+          <div style="font-family:var(--font-display);font-weight:600;font-size:10px;letter-spacing:.32em;color:rgba(255,255,255,.7)">GROUPE</div>
+          <div style="font-family:var(--font-display);font-weight:800;font-size:22px;letter-spacing:.02em;color:#fff;margin-top:2px">GIBOIRE</div>
+        </div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:14px">Back office</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:3px">
+        <sc-for list="{{ adminNav }}" as="n" hint-placeholder-count="2">
+          <button onClick="{{ n.onClick }}" style="{{ n.style }}">
+            <span>{{ n.label }}</span>
+            <sc-if value="{{ n.badge }}" hint-placeholder-val="{{ false }}"><span style="background:var(--color-accent);color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;padding:0 6px;border-radius:var(--gib-r-sm);display:inline-flex;align-items:center;justify-content:center">{{ n.badgeCount }}</span></sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top:auto;padding:14px 10px 0;border-top:1px solid rgba(255,255,255,.14)">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)">Source de données</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-success)"></span>
+          <span style="font-family:var(--font-display);font-weight:700;font-size:13.5px">UnLatch</span>
+        </div>
+        <div style="font-size:11.5px;color:rgba(255,255,255,.55);margin-top:4px">Sync. {{ lastSync }}</div>
+      </div>
+    </aside>
+
+    <main style="flex:1;overflow:auto;background:var(--surface-page)">
+      <sc-if value="{{ isBiens }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:30px 34px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div>
+            <div class="gib-overline">UnLatch · Gestion commerciale</div>
+            <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:28px;color:var(--text-strong);margin:6px 0 0">Biens en vente</h1>
+            <p style="font-size:14px;color:var(--text-muted);margin:6px 0 0">Lots synchronisés depuis UnLatch. Activez « Mis en avant » pour publier un bien sur le site public.</p>
+          </div>
+          <x-import component-from-global-scope="GiboireDesignSystem_152501.Button" variant="secondary" onClick="{{ startSync }}" disabled="{{ syncing }}" hint-size="auto,46px">{{ syncLabel }}</x-import>
+        </div>
+
+        <div style="display:flex;gap:14px;margin:22px 0 18px;flex-wrap:wrap">
+          <sc-for list="{{ biensStats }}" as="s" hint-placeholder-count="4">
+            <div style="flex:1;min-width:150px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r);padding:16px 18px;box-shadow:var(--shadow-xs)">
+              <div style="font-family:var(--font-display);font-weight:800;font-size:30px;color:{{ s.color }};line-height:1">{{ s.value }}</div>
+              <div class="gib-overline" style="margin-top:8px">{{ s.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+          <div style="flex:2;min-width:220px"><x-import component-from-global-scope="GiboireDesignSystem_152501.Input" value="{{ adminQ }}" onChange="{{ setAdminQ }}" placeholder="Rechercher un lot, une résidence…" hint-size="100%,48px"></x-import></div>
+          <div style="flex:1;min-width:180px"><x-import component-from-global-scope="GiboireDesignSystem_152501.Select" value="{{ adminProg }}" onChange="{{ setAdminProg }}" options="{{ progSelectOptions }}" placeholder="Tous les programmes" hint-size="100%,48px"></x-import></div>
+        </div>
+
+        <div style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r);overflow:hidden;box-shadow:var(--shadow-xs)">
+          <div style="display:grid;grid-template-columns:2.2fr 1fr 1.4fr 1.2fr 1.1fr 1fr 1.1fr;gap:10px;padding:12px 18px;background:var(--neutral-50);border-bottom:1px solid var(--border-subtle);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)">
+            <span>Lot / Résidence</span><span>Type</span><span>Étage / orient.</span><span>Prix</span><span>Statut</span><span>Dispo.</span><span style="text-align:right">Mis en avant</span>
+          </div>
+          <sc-for list="{{ adminLots }}" as="l" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:2.2fr 1fr 1.4fr 1.2fr 1.1fr 1fr 1.1fr;gap:10px;padding:14px 18px;border-bottom:1px solid var(--divider);align-items:center">
+              <div style="display:flex;align-items:center;gap:12px">
+                <div style="width:34px;height:34px;background:{{ l.thumb }};border-radius:var(--gib-r-xs);flex-shrink:0"></div>
+                <div style="line-height:1.35;min-width:0">
+                  <div style="font-family:var(--font-display);font-weight:700;font-size:13.5px;color:var(--text-strong)">{{ l.lotRef }}</div>
+                  <div style="font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ l.progName }} · {{ l.city }}</div>
+                </div>
+              </div>
+              <span style="font-family:var(--font-display);font-weight:700;font-size:13.5px;color:var(--text-strong)">{{ l.typeSurface }}</span>
+              <span style="font-size:12.5px;color:var(--text-body)">{{ l.floorLabel }} · {{ l.orient }}</span>
+              <span style="font-family:var(--font-display);font-weight:700;font-size:13.5px;color:var(--text-strong)">{{ l.priceLabel }}</span>
+              <span><span style="background:{{ l.statusBg }};color:{{ l.statusFg }};font-family:var(--font-body);font-weight:700;font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;padding:4px 9px;border-radius:var(--gib-r-xs)">{{ l.statusLabel }}</span></span>
+              <span style="font-size:12.5px;color:var(--text-body)">{{ l.availLabel }}</span>
+              <div style="display:flex;justify-content:flex-end">
+                <button onClick="{{ l.toggle }}" role="switch" aria-checked="{{ l.featuredBool }}" style="{{ l.switchStyle }}"><span style="{{ l.knobStyle }}"></span></button>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ adminEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:40px;text-align:center;color:var(--text-muted);font-size:14px">Aucun lot ne correspond.</div></sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isLeads }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:30px 34px">
+        <div class="gib-overline">Site public · Saisies formulaires</div>
+        <h1 style="font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;font-size:28px;color:var(--text-strong);margin:6px 0 0">Leads</h1>
+        <p style="font-size:14px;color:var(--text-muted);margin:6px 0 0;max-width:78ch">Récapitulatif des demandes envoyées depuis le site. Ces saisies sont transmises par API à UnLatch — l'assignation et le traitement se font dans le CRM.</p>
+
+        <div style="display:flex;align-items:center;gap:9px;margin:16px 0 18px;padding:10px 14px;background:var(--surface-primary-tint);border:1px solid var(--border-subtle);border-radius:var(--gib-r-sm);font-size:13px;color:var(--blue-800);width:fit-content">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--color-success);flex-shrink:0"></span>
+          <span><b>{{ leadTotal }} demandes</b> transmises à UnLatch · dernier envoi {{ lastSync }}</span>
+        </div>
+
+        <div style="overflow-x:auto;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--gib-r);box-shadow:var(--shadow-xs)">
+          <div style="min-width:760px;display:grid;grid-template-columns:1fr 1.6fr 1.1fr 1.6fr;gap:14px;padding:12px 18px;background:var(--neutral-50);border-bottom:1px solid var(--border-subtle);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)">
+            <span>Date</span><span>Contact</span><span>Téléphone</span><span>Demande</span>
+          </div>
+          <sc-for list="{{ leads }}" as="ld" hint-placeholder-count="5">
+            <div style="min-width:760px;display:grid;grid-template-columns:1fr 1.6fr 1.1fr 1.6fr;gap:14px;padding:14px 18px;border-bottom:1px solid var(--divider);align-items:start">
+              <span style="font-size:12.5px;color:var(--text-body);white-space:nowrap">{{ ld.date }}</span>
+              <div style="min-width:0;line-height:1.45">
+                <div style="font-family:var(--font-display);font-weight:700;font-size:13.5px;color:var(--text-strong)">{{ ld.name }}</div>
+                <div style="font-size:12.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ ld.email }}</div>
+              </div>
+              <span style="font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--text-strong);white-space:nowrap">{{ ld.phone }}</span>
+              <div style="min-width:0;line-height:1.45">
+                <div style="font-family:var(--font-display);font-weight:700;font-size:12.5px;color:var(--text-strong)">{{ ld.progName }}</div>
+                <div style="font-size:12.5px;color:var(--text-muted)">{{ ld.lotRef }} · {{ ld.lotType }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+    </main>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;startMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;front&quot;,&quot;admin&quot;],&quot;default&quot;:&quot;front&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prototype&quot;},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;split&quot;,&quot;immersive&quot;,&quot;panel&quot;],&quot;default&quot;:&quot;immersive&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Header (accueil)&quot;},&quot;corners&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;rounded&quot;,&quot;square&quot;],&quot;default&quot;:&quot;rounded&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;compact&quot;,&quot;normal&quot;,&quot;spacious&quot;],&quot;default&quot;:&quot;spacious&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apparence&quot;},&quot;promoRibbons&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Listing front&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const G = window.GIBOIRE;
+    const featured = {}, leadStatus = {}, leadAdvisor = {};
+    G.LOTS.forEach(l => featured[l.id] = l.featured);
+    G.LEADS.forEach(l => { leadStatus[l.id] = l.status; leadAdvisor[l.id] = l.advisor; });
+    this.state = {
+      mode: props.startMode || "front",
+      frontScreen: "list",
+      currentProgId: null,
+      homeView: "list",
+      frontView: "grid",
+      cardVariant: props.cardVariant || "editorial",
+      promoRibbons: props.promoRibbons !== false,
+      currentLotId: null,
+      q: "", filterCity: "", filterType: "", filterProg: "", sort: "featured",
+      featured, leadStatus, leadAdvisor,
+      adminScreen: "biens", adminProg: "", adminQ: "", leadFilter: "all",
+      syncing: false, lastSync: "aujourd'hui 08:14",
+      activePhoto: 0, lightbox: false,
+      form: { first: "", last: "", email: "", phone: "", message: "", rgpd: false },
+      formSent: false
+    };
+  }
+
+  componentDidMount() {
+    this._mh = (e) => {
+      if (e.data && e.data.type === "giboire-map-open") this.openProgram(e.data.prog);
+    };
+    window.addEventListener("message", this._mh);
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("gib-in"); this._io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    this._scanReveal();
+  }
+  _scanReveal() {
+    if (!this._io) return;
+    try { document.querySelectorAll(".gib-reveal:not(.gib-in)").forEach((el) => this._io.observe(el)); } catch (e) {}
+  }
+  componentWillUnmount() { window.removeEventListener("message", this._mh); if (this._io) this._io.disconnect(); }
+  componentDidUpdate(prev) {
+    if (this.props.cardVariant && this.props.cardVariant !== prev.cardVariant) this.setState({ cardVariant: this.props.cardVariant });
+    if (this.props.promoRibbons !== prev.promoRibbons) this.setState({ promoRibbons: this.props.promoRibbons !== false });
+    if (this._raf) cancelAnimationFrame(this._raf);
+    this._raf = requestAnimationFrame(() => this._scanReveal());
+  }
+
+  baseColor(prog) {
+    return { thabor:"#3d517c", georges:"#4f6350", chalands:"#6d5560", rance:"#17315d", kerlann:"#42506a", helios:"#a55c44", iris:"#3a5170", prisme:"#4a5461", belleville:"#6a4f5b" }[prog] || "#3d517c";
+  }
+  // Photothèque : une photo d'ambiance par programme + galerie (fiche détail)
+  photos() {
+    return {
+      thabor:     { c: "balcon-ville.png",        g: ["int-fleurs.png", "cuisine-famille.png", "terrasse-famille.png"] },
+      georges:    { c: "salon-ville.png",         g: ["chambre-lecture.png", "cuisine-famille.png", "int-fleurs.png"] },
+      chalands:   { c: "capmail.jpg",             g: ["balcon-ville.png", "salon-ville.png", "cuisine-famille.png"] },
+      rance:      { c: "roches-nuit.jpg",         g: ["balcon-ville.png", "salon-ville.png", "ambilly-terrasse.jpg"] },
+      kerlann:    { c: "vannes-renaissance.jpg",  g: ["chambre-lecture.png", "int-fleurs.png", "terrasse-famille.png"] },
+      helios:     { c: "terrasse-famille.png",    g: ["balcon-ville.png", "salon-ville.png", "ambilly-terrasse.jpg"] },
+      iris:       { c: "int-fleurs.png",          g: ["salon-ville.png", "chambre-lecture.png", "cuisine-famille.png"] },
+      prisme:     { c: "cuisine-famille.png",     g: ["salon-ville.png", "balcon-ville.png", "int-fleurs.png"] },
+      belleville: { c: "ambilly-terrasse.jpg",    g: ["balcon-ville.png", "salon-ville.png", "int-fleurs.png"] }
+    };
+  }
+  photoUrl(file) { return "url(\"assets/photos/" + file + "\")"; }
+  progImg(prog) {
+    const p = this.photos()[prog];
+    if (p) return this.photoUrl(p.c);
+    return (window.GIBOIRE_IMG ? window.GIBOIRE_IMG.facade(prog, this.baseColor(prog)) : "none");
+  }
+  galleryUrls(prog) {
+    const p = this.photos()[prog];
+    return p ? [p.c].concat(p.g) : [];
+  }
+  // fond de header (image + dégradé bas pour lisibilité du texte)
+  coverBg(prog) {
+    return "linear-gradient(180deg, rgba(15,33,63,0) 40%, rgba(15,33,63,.8) 100%), " + this.progImg(prog) + " center/cover no-repeat, " + this.baseColor(prog);
+  }
+  // fond centré (scrim global) pour la variante Signature
+  coverCenterBg(prog) {
+    return "linear-gradient(0deg, rgba(15,33,63,.55), rgba(15,33,63,.44)), " + this.progImg(prog) + " center/cover no-repeat, " + this.baseColor(prog);
+  }
+  // vignette simple, sans scrim
+  thumbBg(prog) {
+    return this.progImg(prog) + " center/cover no-repeat, " + this.baseColor(prog);
+  }
+  statusMeta(s) {
+    return {
+      dispo: { label: "Disponible", bg: "var(--color-success-soft)", fg: "var(--green-600)" },
+      optionne: { label: "Optionné", bg: "var(--color-warning-soft)", fg: "var(--amber-600)" },
+      vendu: { label: "Vendu", bg: "var(--surface-sunken)", fg: "var(--text-muted)" }
+    }[s];
+  }
+  leadMeta(s) {
+    return {
+      nouveau: { label: "Nouveau", bg: "var(--coral-100)", fg: "var(--coral-700)" },
+      recontacter: { label: "À recontacter", bg: "var(--surface-primary-tint)", fg: "var(--blue-700)" },
+      traite: { label: "Traité", bg: "var(--color-success-soft)", fg: "var(--green-600)" }
+    }[s];
+  }
+  floorLabel(f) { return f <= 0 ? "RDC" : (f === 1 ? "1ᵉʳ étage" : f + "ᵉ étage"); }
+
+  enrich(l) {
+    const G = window.GIBOIRE, p = G.programById(l.prog), sm = this.statusMeta(l.status);
+    return Object.assign({}, l, {
+      progName: p.name, city: p.city, dept: p.dept, delivery: p.delivery, arch: p.arch,
+      cover: this.coverBg(l.prog), coverC: this.coverCenterBg(l.prog), thumb: this.thumbBg(l.prog),
+      typeSurface: l.type + " · " + l.surface + " m²",
+      typeLabel: l.type, priceLabel: G.euro(l.price), floorLabel: this.floorLabel(l.floor),
+      balconyLabel: l.balcony > 0 ? "Balcon " + l.balcony + " m²" : "Sans balcon",
+      availLabel: l.avail, lotRef: "Lot " + l.lot,
+      statusLabel: sm.label, statusBg: sm.bg, statusFg: sm.fg
+    });
+  }
+
+  goList() { this.setState({ mode: "front", frontScreen: "list" }); this.toTop(); }
+  toTop() { try { window.scrollTo(0, 0); } catch (e) {} }
+  emptyForm() { return { first: "", last: "", email: "", phone: "", message: "", rgpd: false }; }
+  openProgram(id) {
+    this.setState({ currentProgId: id, frontScreen: "program", formSent: false, activePhoto: 0, lightbox: false, form: this.emptyForm() });
+    this.toTop();
+  }
+  openLot(id) {
+    const raw = window.GIBOIRE.LOTS.find(l => l.id === id);
+    this.setState({ currentLotId: id, currentProgId: raw ? raw.prog : this.state.currentProgId,
+      frontScreen: "detail", formSent: false, activePhoto: 0, lightbox: false, form: this.emptyForm() });
+    this.toTop();
+  }
+  resetFilters() { this.setState({ q: "", filterCity: "", filterType: "", filterProg: "", sort: "featured" }); }
+
+  seg(active, dark) {
+    const base = { border: "none", cursor: "pointer", fontFamily: "var(--font-display)", fontSize: "13px",
+      padding: "7px 15px", borderRadius: "6px", transition: "all .16s ease", whiteSpace: "nowrap" };
+    if (dark) return Object.assign({}, base, active
+      ? { background: "#fff", color: "var(--blue-900)", fontWeight: 700 }
+      : { background: "transparent", color: "rgba(255,255,255,.78)", fontWeight: 500 });
+    return Object.assign({}, base, active
+      ? { background: "var(--surface-card)", color: "var(--color-primary)", fontWeight: 700, boxShadow: "var(--shadow-xs)" }
+      : { background: "transparent", color: "var(--text-muted)", fontWeight: 500 });
+  }
+
+  renderVals() {
+    const G = window.GIBOIRE, S = this.state;
+
+    let list = G.LOTS.filter(l => S.featured[l.id] && l.status !== "vendu").map(l => this.enrich(l));
+    if (S.filterProg) list = list.filter(x => x.prog === S.filterProg);
+    if (S.filterCity) list = list.filter(x => x.city === S.filterCity);
+    if (S.filterType) list = list.filter(x => x.typeLabel === S.filterType);
+    if (S.q) { const s = S.q.toLowerCase(); list = list.filter(x => (x.progName + " " + x.city + " " + x.lot + " " + x.typeLabel).toLowerCase().indexOf(s) >= 0); }
+    if (S.sort === "price-asc") list.sort((a, b) => a.price - b.price);
+    else if (S.sort === "price-desc") list.sort((a, b) => b.price - a.price);
+    else if (S.sort === "surface-desc") list.sort((a, b) => b.surface - a.surface);
+    else list.sort((a, b) => b.views - a.views);
+    list.forEach(x => {
+      x.open = () => this.openLot(x.id);
+      x.showRibbon = S.promoRibbons && !!x.promoNote;
+      x.hl = () => { const f = document.getElementById("gib-map"); if (f && f.contentWindow) f.contentWindow.postMessage({ type: "giboire-hl", prog: x.prog }, "*"); };
+      x.unhl = () => { const f = document.getElementById("gib-map"); if (f && f.contentWindow) f.contentWindow.postMessage({ type: "giboire-unhl" }, "*"); };
+    });
+
+    const progObj = S.filterProg ? G.programById(S.filterProg) : null;
+
+    // ---- Agrégation par programme (accueil) ----
+    const byProg = {};
+    list.forEach(x => { (byProg[x.prog] = byProg[x.prog] || []).push(x); });
+    const programs = G.PROGRAMS.filter(p => byProg[p.id]).map(p => {
+      const ls = byProg[p.id];
+      const from = Math.min.apply(null, ls.map(l => l.price));
+      const types = [];
+      ls.forEach(l => { if (types.indexOf(l.typeLabel) < 0) types.push(l.typeLabel); });
+      types.sort();
+      const surfaces = ls.map(l => l.surface);
+      return {
+        id: p.id, name: p.name, city: p.city, dept: p.dept, delivery: p.delivery, arch: p.arch,
+        cover: this.coverBg(p.id), coverC: this.coverCenterBg(p.id), thumb: this.thumbBg(p.id),
+        count: ls.length,
+        badgeLabel: ls.length + (ls.length > 1 ? " biens" : " bien"),
+        countLabel: ls.length + (ls.length > 1 ? " biens disponibles" : " bien disponible"),
+        fromLabel: "À partir de " + G.euro(from),
+        typesLabel: types.join(" · "),
+        surfaceLabel: Math.min.apply(null, surfaces) + " à " + Math.max.apply(null, surfaces) + " m²",
+        open: () => this.openProgram(p.id),
+        hl: () => { const f = document.getElementById("gib-map"); if (f && f.contentWindow) f.contentWindow.postMessage({ type: "giboire-hl", prog: p.id }, "*"); },
+        unhl: () => { const f = document.getElementById("gib-map"); if (f && f.contentWindow) f.contentWindow.postMessage({ type: "giboire-unhl" }, "*"); }
+      };
+    });
+    if (S.sort === "price-asc") programs.sort((a, b) => a.count - b.count);
+    else programs.sort((a, b) => b.count - a.count);
+
+    // ---- Programme courant (page intermédiaire) ----
+    let currentProg = null;
+    if (S.currentProgId) {
+      const p = G.programById(S.currentProgId);
+      const pLots = G.LOTS.filter(l => l.prog === p.id && S.featured[l.id] && l.status !== "vendu").map(l => this.enrich(l));
+      pLots.sort((a, b) => a.price - b.price);
+      pLots.forEach(l => { l.open = () => this.openLot(l.id); });
+      const pg = this.galleryUrls(p.id);
+      const pAct = Math.min(S.activePhoto, Math.max(0, pg.length - 1));
+      const avail = pLots.length;
+      const from = avail ? Math.min.apply(null, pLots.map(l => l.price)) : 0;
+      const tps = [];
+      pLots.forEach(l => { if (tps.indexOf(l.typeLabel) < 0) tps.push(l.typeLabel); });
+      tps.sort();
+      currentProg = {
+        id: p.id, name: p.name, city: p.city, dept: p.dept, delivery: p.delivery, arch: p.arch,
+        lots: pLots, count: avail, thumbBg: this.thumbBg(p.id),
+        countLabel: avail + (avail > 1 ? " biens disponibles" : " bien disponible"),
+        fromLabel: avail ? G.euro(from) : "—",
+        mainBg: "linear-gradient(180deg, rgba(15,33,63,0) 40%, rgba(15,33,63,.8) 100%), url('assets/photos/" + pg[pAct] + "') center/cover no-repeat, " + this.baseColor(p.id),
+        gallery: pg.map((f, i) => ({
+          openBox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ activePhoto: i, lightbox: true }); },
+          thumbStyle: { flex: 1, height: "76px", cursor: "pointer", boxSizing: "border-box",
+            borderRadius: "var(--gib-r-sm)", transition: "border-color .15s ease",
+            border: i === pAct ? "2px solid var(--color-accent)" : "2px solid transparent",
+            background: "url('assets/photos/" + f + "') center/cover no-repeat, " + this.baseColor(p.id) }
+        })),
+        openLightbox: () => this.setState({ lightbox: true }),
+        description: "Au cœur de " + p.city + ", " + p.name + " conjugue une architecture soignée signée " +
+          p.arch + " et des prestations durables. Les appartements, du " + (tps[0] || "T2") + " au " +
+          (tps[tps.length - 1] || "T4") + ", bénéficient de larges ouvertures et d'espaces extérieurs privatifs. " +
+          "Nous vous accompagnons de la réservation à la remise des clés.",
+        facts: [
+          { k: "Ville", v: p.city + " · " + p.dept },
+          { k: "Livraison", v: p.delivery },
+          { k: "Architecte", v: p.arch },
+          { k: "Typologies", v: tps.join(" · ") || "—" },
+          { k: "Disponibles", v: avail + " biens" },
+          { k: "À partir de", v: avail ? G.euro(from) : "—" }
+        ]
+      };
+    }
+
+    let current = null;
+    if (S.currentLotId) {
+      const raw = G.LOTS.find(l => l.id === S.currentLotId);
+      current = this.enrich(raw);
+      current.description = "Ce " + current.typeSurface + " au " + current.floorLabel.toLowerCase() +
+        " bénéficie d'une orientation " + current.orient.toLowerCase() + " et d'un séjour lumineux. " +
+        (raw.balcony > 0 ? "Son balcon de " + raw.balcony + " m² prolonge l'espace de vie. " : "") +
+        "Prestations soignées, matériaux durables — dans la tradition d'exigence de Groupe Giboire.";
+      const gUrls = this.galleryUrls(current.prog);
+      const _act = Math.min(S.activePhoto, Math.max(0, gUrls.length - 1));
+      current.gallery = gUrls.map((f, i) => ({
+        openBox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ activePhoto: i, lightbox: true }); },
+        thumbStyle: { flex: 1, height: "76px", cursor: "pointer", boxSizing: "border-box",
+          borderRadius: "var(--gib-r-sm)", transition: "border-color .15s ease",
+          border: i === _act ? "2px solid var(--color-accent)" : "2px solid transparent",
+          background: "url('assets/photos/" + f + "') center/cover no-repeat, " + this.baseColor(current.prog) }
+      }));
+      current.mainBg = "linear-gradient(180deg, rgba(15,33,63,0) 40%, rgba(15,33,63,.8) 100%), url('assets/photos/" + gUrls[_act] + "') center/cover no-repeat, " + this.baseColor(current.prog);
+      current.openLightbox = () => this.setState({ lightbox: true });
+      current.facts = [
+        { k: "Typologie", v: current.type }, { k: "Surface", v: raw.surface + " m²" },
+        { k: "Étage", v: current.floorLabel }, { k: "Orientation", v: current.orient },
+        { k: "Extérieur", v: current.balconyLabel }, { k: "Disponibilité", v: current.availLabel },
+        { k: "Numéro de lot", v: current.lotRef }, { k: "Prix", v: current.priceLabel }
+      ];
+    }
+
+    const lbProg = S.frontScreen === "program";
+    const galleryFiles = lbProg ? (currentProg ? this.galleryUrls(currentProg.id) : [])
+      : (current ? this.galleryUrls(current.prog) : []);
+    const gLen = galleryFiles.length;
+    const actIdx = gLen ? Math.min(S.activePhoto, gLen - 1) : 0;
+
+    let adminLots = G.LOTS.map(l => this.enrich(l));
+    if (S.adminProg) adminLots = adminLots.filter(x => x.prog === S.adminProg);
+    if (S.adminQ) { const s = S.adminQ.toLowerCase(); adminLots = adminLots.filter(x => (x.progName + " " + x.city + " " + x.lot + " " + x.typeLabel).toLowerCase().indexOf(s) >= 0); }
+    adminLots.forEach(l => {
+      const on = !!S.featured[l.id];
+      l.featuredBool = on;
+      l.toggle = () => this.setState(st => ({ featured: Object.assign({}, st.featured, { [l.id]: !st.featured[l.id] }) }));
+      l.switchStyle = { width: "42px", height: "24px", flexShrink: 0, padding: "2px", border: "none",
+        borderRadius: "999px", cursor: "pointer", display: "flex", alignItems: "center",
+        justifyContent: on ? "flex-end" : "flex-start",
+        background: on ? "var(--color-primary)" : "var(--border-strong)", transition: "background .18s ease" };
+      l.knobStyle = { width: "20px", height: "20px", borderRadius: "50%", background: "#fff", boxShadow: "var(--shadow-xs)", display: "block" };
+    });
+
+    const allLots = G.LOTS;
+    const dispoCount = allLots.filter(l => l.status === "dispo").length;
+    const featCount = Object.keys(S.featured).filter(k => S.featured[k]).length;
+    const optCount = allLots.filter(l => l.status === "optionne").length;
+    const biensStats = [
+      { value: allLots.length, label: "Lots synchronisés", color: "var(--color-primary)" },
+      { value: dispoCount, label: "Disponibles", color: "var(--color-success)" },
+      { value: optCount, label: "Optionnés", color: "var(--color-warning)" },
+      { value: featCount, label: "Mis en avant (site)", color: "var(--color-accent)" }
+    ];
+
+    const leads = G.LEADS.map(l => {
+      const lot = this.enrich(G.LOTS.find(x => x.id === l.lot));
+      return {
+        id: l.id, name: l.first + " " + l.last,
+        email: l.email, phone: l.phone, date: l.date, message: l.message,
+        progName: lot.progName, lotRef: lot.lotRef, lotType: lot.typeSurface
+      };
+    });
+
+    const modeTabs = [{ k: "front", label: "Site public" }, { k: "admin", label: "Back office" }]
+      .map(t => ({ label: t.label, style: this.seg(S.mode === t.k, true), onClick: () => this.setState({ mode: t.k }) }));
+    const viewTabs = [{ k: "grid", label: "Grille" }, { k: "map", label: "Carte" }]
+      .map(t => ({ label: t.label, style: this.seg(S.frontView === t.k, false), onClick: () => this.setState({ frontView: t.k }) }));
+    const variantTabs = [{ k: "editorial", label: "Éditorial" }, { k: "compact", label: "Compacte" }, { k: "signature", label: "Signature" }]
+      .map(t => ({ label: t.label, style: this.seg(S.cardVariant === t.k, false), onClick: () => this.setState({ cardVariant: t.k }) }));
+    const newLeadCount = leads.length;
+    const adminNav = [
+      { k: "biens", label: "Biens en vente" }, { k: "leads", label: "Leads", badge: newLeadCount > 0, badgeCount: newLeadCount }
+    ].map(n => {
+      const on = S.adminScreen === n.k;
+      return { label: n.label, badge: n.badge, badgeCount: n.badgeCount,
+        onClick: () => this.setState({ adminScreen: n.k }),
+        style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px",
+          width: "100%", textAlign: "left", border: "none", cursor: "pointer", borderRadius: "8px",
+          padding: "10px 12px", fontFamily: "var(--font-display)", fontSize: "14.5px", fontWeight: on ? 700 : 500,
+          color: on ? "#fff" : "rgba(255,255,255,.74)", background: on ? "rgba(255,255,255,.12)" : "transparent",
+          transition: "background .16s ease" } };
+    });
+
+    const f = S.form;
+    const cannotSubmit = !(f.first && f.last && f.email && f.phone && f.rgpd);
+
+    return {
+      isFront: S.mode === "front", isAdmin: S.mode === "admin",
+      isList: S.mode === "front" && S.frontScreen === "list",
+      isProgram: S.mode === "front" && S.frontScreen === "program",
+      isDetail: S.mode === "front" && S.frontScreen === "detail",
+      currentProg, frontPrograms: programs, progCount: programs.length,
+      goProgram: () => { if (S.currentProgId) this.openProgram(S.currentProgId); },
+      isSignature: S.homeView === "list",
+      isHomeMap: S.homeView === "map",
+      homeTabs: [{ k: "list", label: "Liste" }, { k: "map", label: "Carte" }]
+        .map(t => ({ label: t.label, style: this.seg(S.homeView === t.k, false), onClick: () => this.setState({ homeView: t.k }) })),
+      isBiens: S.adminScreen === "biens", isLeads: S.adminScreen === "leads",
+      modeTabs, viewTabs, variantTabs, adminNav, leadTotal: leads.length,
+      sortOptions: [
+        { value: "featured", label: "Tri : mis en avant" },
+        { value: "price-asc", label: "Prix croissant" },
+        { value: "price-desc", label: "Prix décroissant" },
+        { value: "surface-desc", label: "Surface décroissante" }
+      ],
+      progSelectOptions: G.PROGRAMS.map(p => ({ value: p.id, label: p.name })),
+      leadStatusOptions: [
+        { value: "nouveau", label: "Nouveau" },
+        { value: "recontacter", label: "À recontacter" },
+        { value: "traite", label: "Traité" }
+      ],
+      advisorOptions: ["Julien Marchand", "Amélie Rocher", "Théo Lambert"],
+      heroBg: "linear-gradient(180deg, rgba(15,33,63,0) 46%, rgba(15,33,63,.72) 100%), url(\"assets/photos/ambilly-terrasse.jpg\") center/cover no-repeat, var(--blue-900)",
+      corners: this.props.corners || "rounded",
+      density: this.props.density || "spacious",
+      heroSplit: this.props.heroStyle === "split",
+      heroImmersive: (this.props.heroStyle || "immersive") === "immersive",
+      heroPanel: this.props.heroStyle === "panel",
+      heroImmersiveBg: "linear-gradient(180deg, rgba(15,33,63,.15) 0%, rgba(15,33,63,.4) 45%, rgba(9,18,36,.9) 100%), url('assets/photos/ambilly-terrasse.jpg') center/cover no-repeat, var(--blue-900)",
+      footerServices: ["Achat neuf", "Achat / vente", "Gestion locative", "Investissement", "Immobilier d'entreprise"],
+      footerGroup: ["Notre histoire", "Nos résidences", "Nos agences", "Recrutement", "Mentions légales"],
+      lightboxOpen: !!(S.lightbox && gLen),
+      lightboxBg: gLen ? ("url('assets/photos/" + galleryFiles[actIdx] + "') center/contain no-repeat") : "",
+      lightboxCounter: (actIdx + 1) + " / " + gLen,
+      closeLightbox: () => this.setState({ lightbox: false }),
+      prevPhoto: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ activePhoto: (actIdx - 1 + gLen) % gLen }); },
+      nextPhoto: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ activePhoto: (actIdx + 1) % gLen }); },
+      frontLots: list, frontCount: list.length, frontEmpty: list.length === 0,
+      hasProgFilter: !!S.filterProg, progFilterLabel: progObj ? progObj.name : "",
+      clearProg: () => this.setState({ filterProg: "" }),
+      q: S.q, setQ: (e) => this.setState({ q: e.target.value }),
+      filterCity: S.filterCity, setCity: (e) => this.setState({ filterCity: e.target.value }),
+      filterType: S.filterType, setType: (e) => this.setState({ filterType: e.target.value }),
+      sort: S.sort, setSort: (e) => this.setState({ sort: e.target.value }),
+      resetFilters: () => this.resetFilters(),
+      runSearch: () => { try { const el = document.getElementById("gib-results"); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 20, behavior: "smooth" }); } catch (e) {} },
+      goList: () => this.goList(),
+      current,
+      formSent: S.formSent, formOpen: !S.formSent, form: f, cannotSubmit,
+      setFirst: (e) => this.setState({ form: Object.assign({}, S.form, { first: e.target.value }) }),
+      setLast: (e) => this.setState({ form: Object.assign({}, S.form, { last: e.target.value }) }),
+      setEmail: (e) => this.setState({ form: Object.assign({}, S.form, { email: e.target.value }) }),
+      setPhone: (e) => this.setState({ form: Object.assign({}, S.form, { phone: e.target.value }) }),
+      setMessage: (e) => this.setState({ form: Object.assign({}, S.form, { message: e.target.value }) }),
+      toggleRgpd: (e) => this.setState({ form: Object.assign({}, S.form, { rgpd: e.target.checked }) }),
+      submitForm: () => { if (!cannotSubmit) this.setState({ formSent: true }); },
+      resetForm: () => this.setState({ formSent: false, form: { first: "", last: "", email: "", phone: "", message: "", rgpd: false } }),
+      adminLots, adminEmpty: adminLots.length === 0, biensStats,
+      adminQ: S.adminQ, setAdminQ: (e) => this.setState({ adminQ: e.target.value }),
+      adminProg: S.adminProg, setAdminProg: (e) => this.setState({ adminProg: e.target.value }),
+      lastSync: S.lastSync, syncing: S.syncing, syncLabel: S.syncing ? "Synchronisation…" : "Synchroniser UnLatch",
+      startSync: () => { this.setState({ syncing: true }); setTimeout(() => this.setState({ syncing: false, lastSync: "à l'instant" }), 1400); },
+      leads
+    };
+  }
+}
+</script>
+</body>
+</html>

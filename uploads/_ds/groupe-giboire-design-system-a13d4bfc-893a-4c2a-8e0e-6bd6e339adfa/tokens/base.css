@@ -1,0 +1,70 @@
+/* Groupe Giboire — Base element defaults built on the tokens.
+   Keep light: consumers rely on tokens + components, not heavy global rules. */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--color-text-body);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-2);
+}
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-bold); }
+h2 { font-size: var(--fs-h2); font-weight: var(--fw-bold); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
+h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); }
+
+p { margin: 0 0 var(--space-3); text-wrap: pretty; }
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.16s ease;
+}
+a:hover { color: var(--color-link-hover); text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Editorial display helper */
+.gib-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-tight);
+  color: var(--color-text);
+}
+.gib-display em { font-style: italic; }
+
+/* Overline / small label */
+.gib-overline {
+  font-family: var(--font-heading);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-overline);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+hr {
+  border: none;
+  border-top: var(--border-hairline);
+  margin: var(--space-4) 0;
+}

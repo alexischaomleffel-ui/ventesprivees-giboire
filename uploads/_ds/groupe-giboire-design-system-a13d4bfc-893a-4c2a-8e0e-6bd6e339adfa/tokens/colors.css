@@ -1,0 +1,69 @@
+/* Groupe Giboire — Color tokens
+   Palette built around the historic deep blue of the logotype,
+   a secondary blue, warm neutrals, and sparingly-used expressive accents. */
+
+:root {
+  /* ---- Brand primary (deep blue family) ---- */
+  --gib-blue-900: #17315d; /* Bleu profond — signature */
+  --gib-blue-700: #3d517c; /* Bleu secondaire */
+
+  /* ---- Warm neutrals (principal palette) ---- */
+  --gib-taupe: #ada696;      /* Taupe — mid neutral, separators */
+  --gib-sand: #d4cebd;       /* Sable clair — discreet fills, cards */
+  --gib-ivory: #e8e7df;      /* Ivoire — light page background */
+  --gib-offwhite: #f2f2ec;   /* Blanc cassé — primary surface */
+  --gib-white: #ffffff;
+
+  /* ---- Secondary / expressive accents (use sparingly) ---- */
+  --gib-olive: #7f886f;
+  --gib-olive-light: #bdbfb2;
+  --gib-olive-pale: #e3e2dd;
+  --gib-plum: #8d6b78;
+  --gib-mauve: #c1b1b7;
+  --gib-rose: #e6dee1;
+  --gib-brown: #32252a;      /* Brun foncé — neutral body text */
+  --gib-taupe-dark: #8b7f83; /* Taupe foncé — muted text */
+  --gib-grey-rose: #cbc6c8;
+  --gib-terracotta: #bb6a4a; /* Signature accent, dose with care */
+  --gib-apricot: #dbb29d;
+  --gib-peach: #f0dfd7;
+
+  /* ================= Semantic UI roles ================= */
+  --color-primary: var(--gib-blue-900);
+  --color-primary-hover: var(--gib-blue-700);
+  --color-on-primary: var(--gib-offwhite);
+
+  --color-accent: var(--gib-terracotta);
+  --color-accent-hover: #a55a3d;
+  --color-on-accent: var(--gib-offwhite);
+
+  --color-bg: var(--gib-offwhite);
+  --color-bg-subtle: var(--gib-ivory);
+  --color-surface: var(--gib-white);
+  --color-surface-sand: var(--gib-sand);
+
+  --color-border: var(--gib-sand);
+  --color-border-strong: var(--gib-taupe);
+  --color-divider: #e0dccf;
+
+  --color-text: var(--gib-blue-900);
+  --color-text-body: var(--gib-brown);
+  --color-text-muted: var(--gib-taupe-dark);
+  --color-text-inverse: var(--gib-offwhite);
+
+  --color-link: var(--gib-blue-700);
+  --color-link-hover: var(--gib-blue-900);
+
+  /* States — kept accessible on offwhite & white */
+  --color-success: var(--gib-olive);
+  --color-success-bg: var(--gib-olive-pale);
+  --color-warning: #b4802a;
+  --color-warning-bg: #f3e7d0;
+  --color-danger: #9d4432;
+  --color-danger-bg: #f2dcd5;
+  --color-info: var(--gib-blue-700);
+  --color-info-bg: var(--gib-ivory);
+
+  /* Focus ring */
+  --color-focus: var(--gib-blue-700);
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carte des programmes — Groupe Giboire</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/colors.css">
+<link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/groupe-giboire-design-system-a13d4bfc-893a-4c2a-8e0e-6bd6e339adfa/tokens/typography.css">
+<script src="giboire-data.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; }
+  #map { width: 100%; height: 100vh; background: var(--gib-ivory); }
+  .leaflet-container { font-family: var(--font-body); }
+  .gib-pin {
+    background: var(--gib-blue-900);
+    color: #fff;
+    border: 1.5px solid #fff;
+    box-shadow: 0 2px 8px rgba(23,49,93,.35);
+    width: 40px; height: 40px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .gib-pin .n { font-family: var(--font-heading); font-weight: 700; font-size: 15px; }
+  .gib-pin .lbl { font-size: 7.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  .leaflet-popup-content-wrapper { border-radius: 4px; }
+  .leaflet-popup-content { margin: 14px 16px; }
+  .gib-pop-city { font-family: var(--font-heading); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gib-taupe-dark); margin-bottom: 3px; }
+  .gib-pop-name { font-family: var(--font-heading); font-weight: 700; font-size: 15px; color: var(--gib-blue-900); margin-bottom: 8px; }
+  .gib-pop-meta { font-size: 12.5px; color: var(--gib-brown); line-height: 1.5; margin-bottom: 12px; }
+  .gib-pop-meta b { color: var(--gib-blue-900); }
+  .gib-pop-btn {
+    display: inline-block; width: 100%; box-sizing: border-box; text-align: center;
+    background: var(--gib-blue-900); color: #fff; border: none; cursor: pointer;
+    font-family: var(--font-heading); font-weight: 600; font-size: 13px;
+    padding: 9px 12px; border-radius: 4px;
+  }
+  .gib-pop-btn:hover { background: var(--gib-blue-700); }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  const { PROGRAMS, LOTS, euro } = window.GIBOIRE;
+  const map = L.map("map", { scrollWheelZoom: true }).setView([47.6, -1.4], 7);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors", maxZoom: 19
+  }).addTo(map);
+
+  const bounds = [];
+  PROGRAMS.forEach(function (p) {
+    const lots = LOTS.filter(function (l) { return l.prog === p.id && l.featured && l.status !== "vendu"; });
+    if (!lots.length) return;
+    const from = Math.min.apply(null, lots.map(function (l) { return l.price; }));
+    const icon = L.divIcon({
+      className: "",
+      html: '<div class="gib-pin"><span class="n">' + lots.length + '</span><span class="lbl">biens</span></div>',
+      iconSize: [40, 40], iconAnchor: [20, 20], popupAnchor: [0, -22]
+    });
+    const m = L.marker([p.lat, p.lng], { icon: icon }).addTo(map);
+    bounds.push([p.lat, p.lng]);
+    m.bindPopup(
+      '<div class="gib-pop-city">' + p.city + " · " + p.dept + '</div>' +
+      '<div class="gib-pop-name">' + p.name + '</div>' +
+      '<div class="gib-pop-meta"><b>' + lots.length + '</b> bien' + (lots.length > 1 ? "s" : "") + ' en promotion<br>' +
+      'À partir de <b>' + euro(from) + '</b><br>Livraison ' + p.delivery + '</div>' +
+      '<button class="gib-pop-btn" onclick="openProg(\'' + p.id + '\')">Voir les biens</button>'
+    );
+  });
+  if (bounds.length) map.fitBounds(bounds, { padding: [60, 60] });
+
+  window.openProg = function (id) {
+    parent.postMessage({ type: "giboire-map-open", prog: id }, "*");
+  };
+</script>
+</body>
+</html>
