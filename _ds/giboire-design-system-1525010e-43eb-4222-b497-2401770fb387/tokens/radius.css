@@ -1,0 +1,13 @@
+:root {
+  /* Corner radii — Giboire favours soft, generous rounding on cards & pills */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+  --radius-card: 16px;
+  --radius-input: 10px;
+  --radius-button: 10px;
+}

@@ -1,0 +1,45 @@
+:root {
+  /* ============ FONT FAMILIES ============ */
+  --font-display: 'Montserrat', 'Segoe UI', system-ui, sans-serif; /* wordmark & headings */
+  --font-body: 'Mulish', system-ui, -apple-system, sans-serif;      /* UI & running text */
+
+  /* ============ WEIGHTS ============ */
+  --fw-regular: 400; /* @kind other */
+  --fw-medium: 500; /* @kind other */
+  --fw-semibold: 600; /* @kind other */
+  --fw-bold: 700; /* @kind other */
+  --fw-extrabold: 800; /* @kind other */
+
+  /* ============ TYPE SCALE (fluid-ish, px) ============ */
+  --fs-display: 64px;   /* hero */
+  --fs-h1: 48px;
+  --fs-h2: 38px;
+  --fs-h3: 28px;
+  --fs-h4: 22px;
+  --fs-h5: 18px;
+  --fs-body-lg: 18px;
+  --fs-body: 16px;
+  --fs-body-sm: 14px;
+  --fs-caption: 13px;
+  --fs-overline: 12px;
+
+  /* ============ LINE HEIGHTS ============ */
+  --lh-tight: 1.08; /* @kind other */
+  --lh-snug: 1.2; /* @kind other */
+  --lh-normal: 1.5; /* @kind other */
+  --lh-relaxed: 1.65; /* @kind other */
+
+  /* ============ LETTER SPACING ============ */
+  --ls-tight: -0.02em; /* @kind other */
+  --ls-normal: 0; /* @kind other */
+  --ls-wide: 0.04em; /* @kind other */
+  --ls-overline: 0.18em; /* @kind other */
+
+  /* ============ SEMANTIC TEXT ROLES ============ */
+  --type-hero-family: var(--font-display);
+  --type-hero-weight: var(--fw-extrabold);
+  --type-heading-family: var(--font-display);
+  --type-heading-weight: var(--fw-bold);
+  --type-body-family: var(--font-body);
+  --type-body-weight: var(--fw-regular);
+}

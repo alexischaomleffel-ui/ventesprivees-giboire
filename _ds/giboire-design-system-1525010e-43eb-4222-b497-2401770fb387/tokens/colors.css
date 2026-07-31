@@ -1,0 +1,101 @@
+:root {
+  /* ============ BASE PALETTE ============ */
+
+  /* Bleu profond — signature primary. Scale built around #17315d */
+  --blue-950: #0b1830;
+  --blue-900: #0f213f;
+  --blue-800: #132a52;
+  --blue-700: #17315d;   /* ★ Primary — Bleu profond signature */
+  --blue-600: #244477;
+  --blue-500: #365a93;
+  --blue-400: #5878ab;
+  --blue-300: #8aa1c5;
+  --blue-200: #b9c8de;
+  --blue-100: #dde5f0;
+  --blue-50:  #eef2f8;
+
+  /* Corail — secondary accent. Scale around #fc716b */
+  --coral-700: #d8433c;
+  --coral-600: #ee554e;
+  --coral-500: #fc716b;   /* ★ Secondary — accent */
+  --coral-400: #fd908b;
+  --coral-300: #feb1ad;
+  --coral-200: #ffd0cd;
+  --coral-100: #ffe6e4;
+  --coral-50:  #fff3f2;
+
+  /* Neutrals — cool-warm greys tuned to sit under the blue */
+  --neutral-950: #0e1420;
+  --neutral-900: #1b2230;
+  --neutral-800: #2c3444;
+  --neutral-700: #434b5c;
+  --neutral-600: #5c6474;
+  --neutral-500: #7a8290;
+  --neutral-400: #9aa1ad;
+  --neutral-300: #c2c7d0;
+  --neutral-200: #e0e3e9;
+  --neutral-150: #eaedf1;
+  --neutral-100: #f1f3f6;
+  --neutral-50:  #f7f8fa;
+  --white: #ffffff;
+
+  /* Semantic hues */
+  --green-600: #1f8a5b;
+  --green-500: #26a56c;
+  --green-100: #dff2e8;
+  --amber-600: #c9820e;
+  --amber-500: #e5971a;
+  --amber-100: #fbeecd;
+  --red-600: #d8433c;
+  --red-500: #e85a52;
+  --red-100: #fbe1df;
+
+  /* ============ SEMANTIC ALIASES ============ */
+  --color-primary: var(--blue-700);
+  --color-primary-hover: var(--blue-800);
+  --color-primary-active: var(--blue-900);
+  --color-primary-soft: var(--blue-50);
+  --color-on-primary: var(--white);
+
+  --color-accent: var(--coral-500);
+  --color-accent-hover: var(--coral-600);
+  --color-accent-active: var(--coral-700);
+  --color-accent-soft: var(--coral-50);
+  --color-on-accent: var(--white);
+
+  /* Text */
+  --text-strong: var(--blue-950);
+  --text-body: var(--neutral-800);
+  --text-muted: var(--neutral-600);
+  --text-subtle: var(--neutral-500);
+  --text-on-dark: var(--white);
+  --text-on-dark-muted: rgba(255,255,255,0.72);
+  --text-link: var(--blue-700);
+  --text-link-hover: var(--coral-500);
+
+  /* Surfaces */
+  --surface-page: var(--neutral-50);
+  --surface-card: var(--white);
+  --surface-raised: var(--white);
+  --surface-sunken: var(--neutral-100);
+  --surface-inverse: var(--blue-700);
+  --surface-inverse-deep: var(--blue-900);
+  --surface-accent-tint: var(--coral-50);
+  --surface-primary-tint: var(--blue-50);
+
+  /* Borders & dividers */
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-400);
+  --border-focus: var(--blue-500);
+  --divider: var(--neutral-150);
+
+  /* Semantic states */
+  --color-success: var(--green-500);
+  --color-success-soft: var(--green-100);
+  --color-warning: var(--amber-500);
+  --color-warning-soft: var(--amber-100);
+  --color-danger: var(--red-500);
+  --color-danger-soft: var(--red-100);
+  --color-verified: var(--blue-600);
+}
